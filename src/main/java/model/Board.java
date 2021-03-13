@@ -1,33 +1,33 @@
 package model;
 
 /**
- * @author g55019 / Cotton Ian
- * La classe board définit un plateau de jeu sur lequel le joueur va poser ses Tile
- * Ce plateau de Tile aura un taille 4x4 et toute case vide sera indiquer par une valeur null
+ *@author g55019 / Cotton Ian
+ *The board class defines a game board on which the player will place his Tiles
+ *This Tile board will have a 4x4 size and any empty square will be indicated by a null value
  */
 
 public class Board {
     private Tile[][] plateau;
 
-    //Constructeur, initialise l'attribut plateau -> Tableau à 2 dimension de taille 4x4
-    //L'ajout d'un attribut taille facilement implémentable
+    // Constructor, initialize the plate attribute -> 2-dimensional array of size 4x4
+    // Adding an easily implementable size attribute
     public Board() {
         Tile[][] plateaudeTuile = new Tile[4][4];
         this.plateau = plateaudeTuile;
     }
 
     /*
-    Permet de connaitre la taille du plateau de tuile et renvoie celle-ci.
-    @return Integer la taille du tableau
-     */
+     Allows you to know the size of the tile board and returns it.
+     @return Integer the size of the array
+   */
     public Integer getSize(){
         Integer taille = this.plateau.length;
         return taille;
     }
 
     /*
-    Permet de savoir si une position donnée se trouve dans le plateau renvoie un boolean.
-    @return boolean, true si dans plateau sinon false
+     Used to find out if a given position is in the board returns a boolean.
+     @return boolean, true if in tray otherwise false
      */
 
     public boolean isInside(Position pos){
