@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 /**
  *@author g55019 / Cotton Ian
  *The board class defines a game board on which the player will place his Tiles
@@ -17,9 +19,26 @@ public class Board {
     }
 
     /*
-     Allows you to know the size of the tile board and returns it.
-     @return Integer the size of the array
-   */
+    temporary method which displays the table for the tests
+     */
+    public void afficherBoard() {
+        for(int ligne = 0; ligne < this.plateau.length;ligne++){
+            for (int colonne = 0; colonne < this.plateau[0].length; colonne++){
+                if (this.plateau[ligne][colonne] == null){
+                    System.out.print("null ");
+                }
+                else{
+                    System.out.print(this.plateau[ligne][colonne].getValue() + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    /*
+    Allows you to know the size of the tile board and returns it.
+    @return Integer the size of the array
+    */
     public Integer getSize(){
         Integer taille = this.plateau.length;
         return taille;
@@ -60,10 +79,18 @@ public class Board {
     @return boolean |true if the tile can be put at the given position if not -> false
      */
     public boolean canBePut(Tile tuile, Position pos){
-        if(isInside(pos) == false){
-            throw new IllegalArgumentException("Position out of bound : " + pos);
-        }
+        //if(isInside(pos) == false){
+            //throw new IllegalArgumentException("Position out of bound : " + pos);
+        //}
         return true;
+    }
+
+    /*
+    Add a tile in the array at a given position, it is assumed that the position is on the board
+    @param Tile, Position | the position is on the board
+     */
+    public void put(Tile tuile, Position pos){
+        this.plateau[pos.getRow()][pos.getColumn()] = tuile;
     }
 
 }
