@@ -32,4 +32,14 @@ public class Position {
     public Integer getColumn() {
         return column;
     }
+
+    /*
+    toString method
+     */
+    @Override
+    public String toString() {
+        return "Position : " +
+                row +
+                ", " + column;
+    }
 }
