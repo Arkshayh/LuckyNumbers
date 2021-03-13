@@ -73,16 +73,52 @@ public class Board {
     }
 
     /*
-    Returns true if the tile can be placed at a given position. If a tile is already present, it is replaced.
-    If the given position is out of bound of the board an exception will be thrown.
+    Return a boolean if the tile at the given position is Bigger or equals to the value of the top and left tile
+    the methode return true, else false.
+    If the top or Left tile is null (doesn't exist) value is considered like 0.
+
     @param Tile,Position | a Tile and a Position if the position is OOB -> exception is thrown
     @return boolean |true if the tile can be put at the given position if not -> false
      */
     public boolean canBePut(Tile tuile, Position pos){
-        //if(isInside(pos) == false){
-            //throw new IllegalArgumentException("Position out of bound : " + pos);
-        //}
-        return true;
+        Integer ligne = pos.getRow();
+        Integer colonne = pos.getColumn();
+
+        //Case where row == 0
+        if(ligne == 0){
+            if(colonne == 0){
+                return true;
+            }
+            else{
+                if(plateau[ligne][colonne - 1] == null || plateau[ligne][colonne - 1].getValue() <= tuile.getValue()){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        //case were column = 0
+        if(colonne == 0){
+            if(plateau[ligne -1][colonne] == null || plateau[ligne -1][colonne].getValue() <= tuile.getValue()){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+        //other case
+        if((plateau[ligne-1][colonne] == null || plateau[ligne-1][colonne].getValue() <= tuile.getValue() )
+                &&
+                (plateau[ligne][colonne - 1] == null  || plateau[ligne][colonne - 1].getValue() <= tuile.getValue()) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
     /*
