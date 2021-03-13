@@ -2,32 +2,32 @@ package model;
 
 /**
  * @author g55019 / Cotton Ian
- * La classe position définit un position via 2 attributs : une ligne (row) Integer
- * et une colonne (column) Integer
+ * The position class defines a position via 2 attributes: an Integer row
+ * and an Integer column
  */
 public class Position {
     private Integer row;
     private Integer column;
 
-    /*Constructeur d'une position Les valeurs de la ligne et de la colonnes de celle-ci sont nécéssaires.
-    @param Integer, Integer valeur de la ligne et de la colonne
-     */
+    /* Constructor of a position The values of the row and the column of the position are required.
+    @param Integer, Integer value of row and column
+    */
     public Position(Integer row, Integer column) {
         this.row = row;
         this.column = column;
     }
 
     /*
-    Getter row
-    @return Integer Renvoie la valeur de la ligne d'une position
+    Get row
+    @return Integer Returns the value of the row of a position
      */
     public Integer getRow() {
         return row;
     }
 
     /*
-    Getter column
-    @return Integer Renvoie la valeur de la colonne d'une position
+     Get column
+     @return Integer Returns the value of the column of a position
      */
     public Integer getColumn() {
         return column;
