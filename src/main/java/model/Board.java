@@ -93,4 +93,19 @@ public class Board {
         this.plateau[pos.getRow()][pos.getColumn()] = tuile;
     }
 
+    /*
+    Say if the board if full or not, if it's the case return true else false
+    @return boolean | if there is no null return true else false
+     */
+    public boolean isFull(){
+        for(int ligne = 0; ligne < this.plateau.length;ligne++){
+            for (int colonne = 0; colonne < this.plateau[0].length; colonne++){
+                if (this.plateau[ligne][colonne] == null){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
