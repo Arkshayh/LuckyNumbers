@@ -53,4 +53,17 @@ public class Board {
         return this.plateau[ligne][colonne];
     }
 
+    /*
+    Returns true if the tile can be placed at a given position. If a tile is already present, it is replaced.
+    If the given position is out of bound of the board an exception will be thrown.
+    @param Tile,Position | a Tile and a Position if the position is OOB -> exception is thrown
+    @return boolean |true if the tile can be put at the given position if not -> false
+     */
+    public boolean canBePut(Tile tuile, Position pos){
+        if(isInside(pos) == false){
+            throw new IllegalArgumentException("Position out of bound : " + pos);
+        }
+        return true;
+    }
+
 }
