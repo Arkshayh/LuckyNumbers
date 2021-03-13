@@ -3,18 +3,17 @@ package model;
 /**
  *
  * @author g55019 / Cotton Ian
- * La classe tuile définit une tuile.
- * Celle-ci possède un nombre entre 1 et 20 (compris)
- * Méthode de cette classe : getValue (le getter) et un constructeur
- * Pas d'accesseur car la valeur d'une tuile ne change jamais.
+ * The tile class defines a tile.
+ * This has a number between 1 and 20 (included)
+ * Method of this class: getValue (the getter) and a constructor
  */
 
 public class Tile {
     private Integer value;
 
     /*
-    Constructeur, construit une tuile qui possèdent comme attribut une valeur entre 1 et 20 (compris)
-    @param Integer, nombre compris entre 1 et 20
+    Constructor, builds a tile with an attribute value between 1 and 20 (included)
+    @param Integer, number between 1 and 20
      */
     public Tile(Integer value) {
         if(value < 1 || value > 20){
@@ -25,8 +24,8 @@ public class Tile {
 
     /*
     Getter
-    @return Integer, valeur de la tuile entre 1 & 20 (compris)
-     */
+    @return Integer, tile value between 1 & 20 (inclusive)
+    */
     public Integer getValue() {
         return value;
     }
