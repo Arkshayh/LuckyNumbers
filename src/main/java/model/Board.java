@@ -39,4 +39,18 @@ public class Board {
         return false;
     }
 
+    /*
+    Returns the board tile at a given position if the position is not in the board, throw an exception
+    @param Position,  The position of the tile we want
+    @return Tile, The tile at the given position
+     */
+    public Tile getTile(Position pos){
+        if(isInside(pos) == false){
+            throw new IllegalArgumentException("Position out of bound : " + pos);
+        }
+        Integer ligne  = pos.getRow();
+        Integer colonne = pos.getColumn();
+        return this.plateau[ligne][colonne];
+    }
+
 }
