@@ -3,18 +3,12 @@ package model;
 
 public class test {
     public static void main(String[] args) {
-        Board plateau = new Board();
+        Game jeu = new Game();
+        jeu.start(2);
+        System.out.println(jeu.getBoardSize());
 
-
-
-        plateau.canBePut(new Tile(1), new Position(1,2));
-
-        System.out.println(plateau.canBePut(new Tile(10), new Position(1, 1)));
-
-
-        System.out.println("---------------------------------");
-        plateau.afficherBoard();
-
+        int nb = (int)(Math.random() * ((20 - 2) + 1)) + 2;
+        System.out.println(nb);
+        Tile tuile = new Tile(nb);
     }
-
 }
