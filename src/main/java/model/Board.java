@@ -71,6 +71,100 @@ public class Board {
     }
 
     /*
+    Go through a row of the board and return the value of the first element on the left, if there is none: returns null
+    @param Position | position of the tile that we want to put on the board
+    @return Integer, null | value of the first tile met
+     */
+    private Integer parcourirLigneVersGauche(Position pos){
+        if(pos.getColumn() == 0){
+            return null;
+        }
+        Integer VG = 0;
+        for (int i = 1; i < this.plateau.length -1; i++) {
+            if(pos.getColumn()  - i >= 0){
+                if(plateau[pos.getRow()][pos.getColumn()  - i] == null){
+
+                }
+                else {
+                    VG = plateau[pos.getRow()][pos.getColumn() - i].getValue();
+                    return VG;
+                }
+            }
+        }
+        return null;
+    }
+    /*
+    Go through a row of the board and return the value of the first element on the right, if there is none: returns null
+    @param Position | position of the tile that we want to put on the board
+    @return Integer, null | value of the first tile met
+     */
+    private Integer parcourirLigneVersDroite(Position pos){
+        if(pos.getColumn() == this.plateau[0].length-1){
+            return null;
+        }
+        Integer VD = 0;
+        for (int i = 1; i < this.plateau.length -1; i++) {
+            if(pos.getColumn() + i <= this.plateau[0].length -1){
+                if(plateau[pos.getRow()][pos.getColumn() + i] == null){
+
+                }
+                else{
+                    VD = plateau[pos.getRow()][pos.getColumn() + i].getValue();
+                    return VD;
+                }
+            }
+        }
+        return null;
+    }
+    /*
+    Go through a column of the board and return the value of the first element on the top, if there is none: returns null
+    @param Position | position of the tile that we want to put on the board
+    @return Integer, null | value of the first tile met
+     */
+    private Integer parcourirColonneVersHaut(Position pos){
+        if(pos.getRow() == 0){
+            return null;
+        }
+        Integer VH = 0;
+        for (int i = 1; i < this.plateau[0].length - 1; i++) {
+            if(pos.getRow() - i >= 0){
+                if(plateau[pos.getRow() - i][pos.getColumn()] == null){
+
+                }
+                else {
+                    VH = plateau[pos.getRow() - i][pos.getColumn()].getValue();
+                    return VH;
+                }
+            }
+        }
+        return null;
+    }
+    /*
+    Go through a column of the board and return the value of the first element on the bottom,
+    if there is none: returns null
+    @param Position | position of the tile that we want to put on the board
+    @return Integer, null | value of the first tile met
+     */
+    private Integer parcourirColonneVersBas(Position pos){
+        if(pos.getRow() == this.plateau.length - 1){
+            return null;
+        }
+        Integer VB =0 ;
+        for (int i = 1; i < this.plateau[0].length - 1; i++) {
+            if(pos.getRow() + i <= this.plateau.length - 1){
+                if(plateau[pos.getRow() + i][pos.getColumn()] == null){
+
+                }
+                else{
+                    VB = plateau[pos.getRow() + i][pos.getColumn()].getValue();
+                    return VB;
+                }
+            }
+        }
+        return null;
+    }
+
+    /*
     Return a boolean if the tile at the given position is Bigger or equals to the value of the top and left tile
     the methode && bot and right < tile given return true else false
 
@@ -80,107 +174,16 @@ public class Board {
     public boolean canBePut(Tile tuile, Position pos){
         Integer ligne = pos.getRow();
         Integer colonne = pos.getColumn();
-
+        Integer valTuile = tuile.getValue();
         //Case first row
-        if(ligne == 0){
-            //case top left, check if  right is bigger and botton too
-            if(colonne == 0){
-                if( (plateau[ligne + 1][colonne] == null || plateau[ligne + 1][colonne].getValue() > tuile.getValue())
-                        &&  (plateau[ligne][colonne+1] == null ||  plateau[ligne][colonne+1].getValue() > tuile.getValue())){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            //case top right, check if left is smaller and bottom bigger
-            else if(colonne == plateau[0].length -1){
-                if( (plateau[ligne][colonne-1] == null || plateau[ligne][colonne-1].getValue() < tuile.getValue())
-                        && ( plateau[ligne+1][colonne] == null || plateau[ligne+1][colonne].getValue() > tuile.getValue())){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            //Case first row but not top right/left, check if left is smaller and botton/right bigger
-            else{
-                if( (plateau[ligne][colonne - 1] == null || plateau[ligne][colonne - 1].getValue() < tuile.getValue())
-                && ( plateau[ligne+1][colonne] == null || plateau[ligne+1][colonne].getValue() > tuile.getValue())
-                && (plateau[ligne][colonne+1] == null || plateau[ligne][colonne + 1].getValue() > tuile.getValue())){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
+        if((parcourirColonneVersHaut(pos) == null || parcourirColonneVersHaut(pos) < valTuile) &&
+                (parcourirColonneVersBas(pos) == null || parcourirColonneVersBas(pos) > valTuile) &&
+                (parcourirLigneVersGauche(pos) == null || parcourirLigneVersGauche(pos) < valTuile) &&
+                (parcourirLigneVersDroite(pos) == null || parcourirLigneVersDroite(pos) > valTuile)){
+            return true;
         }
-        //Case last row
-        else if(ligne == plateau.length - 1){
-            //bottom left
-            if(colonne == 0){
-                if( (plateau[ligne-1][colonne] == null || plateau[ligne-1][colonne].getValue() < tuile.getValue())
-                        && (plateau[ligne][colonne+1] == null || plateau[ligne][colonne+1].getValue() > tuile.getValue()) ){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            //bottom right
-            else if(colonne == plateau[0].length - 1){
-                if( (plateau[ligne][colonne - 1] == null || plateau[ligne][colonne - 1].getValue() < tuile.getValue())
-                        && (plateau[ligne-1][colonne] == null || plateau[ligne-1][colonne].getValue() < tuile.getValue())){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            else{
-                if ( (plateau[ligne][colonne - 1] == null || plateau[ligne][colonne - 1].getValue() < tuile.getValue())
-                        && (plateau[ligne-1][colonne] == null || plateau[ligne-1][colonne].getValue() < tuile.getValue())
-                        && (plateau[ligne][colonne+1] == null || plateau[ligne][colonne+1].getValue() > tuile.getValue())){
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-        }
-        //case first column
-        else if(colonne == 0){
-            if( (plateau[ligne-1][colonne] == null || plateau[ligne-1][colonne].getValue() < tuile.getValue())
-                    && (plateau[ligne][colonne+1] == null || plateau[ligne][colonne+1].getValue() > tuile.getValue())
-                    && (plateau[ligne+1][colonne] == null || plateau[ligne+1][colonne].getValue() > tuile.getValue())){
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        //Case last column
-        else if(colonne == plateau[0].length - 1){
-            if( (plateau[ligne-1][colonne] == null || plateau[ligne-1][colonne].getValue() < tuile.getValue())
-                    && (plateau[ligne+1][colonne] == null || plateau[ligne+1][colonne].getValue() > tuile.getValue())
-                    && (plateau[ligne][colonne-1] == null || plateau[ligne][colonne-1].getValue() < tuile.getValue())){
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        //autre cas
         else{
-            if((plateau[ligne-1][colonne] == null || plateau[ligne-1][colonne].getValue() < tuile.getValue())
-                    && (plateau[ligne + 1][colonne] == null || plateau[ligne+1][colonne].getValue() > tuile.getValue())
-                    && (plateau[ligne][colonne - 1] == null || plateau[ligne][colonne-1].getValue() < tuile.getValue())
-                    && (plateau[ligne][colonne+1] == null || plateau[ligne][colonne+1].getValue() > tuile.getValue())){
-                return true;
-            }
-            else{
-                return false;
-            }
+            return false;
         }
     }
 
