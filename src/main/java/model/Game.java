@@ -57,7 +57,12 @@ public class Game implements Model{
         else{
             Board plateau = this.boards[currentPlayerNumber];
             plateau.put(tuile, pos);
-            this.state = State.TURN_END;
+            if(this.boards[currentPlayerNumber].isFull() == true){
+                this.state = State.GAME_OVER;
+            }
+            else{
+                this.state = State.TURN_END;
+            }
         }
     }
 
