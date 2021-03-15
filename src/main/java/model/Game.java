@@ -16,13 +16,14 @@ public class Game implements Model{
         if(playerCount < 2 || playerCount >4){
             throw new IllegalArgumentException("Nombre de joueur incorrect : " + playerCount);
         }
-        else if((this.state != State.NOT_STARTED) && (getState() != State.GAME_OVER)){
+        else if((this.state != State.NOT_STARTED) && (this.state != State.GAME_OVER)){
             throw new IllegalStateException("Etat invalide : " + this.state);
         }
         this.boards = new Board[playerCount]; //Create the Board[]
         for (int i = 0; i < playerCount; i++) {
             this.boards[i] = new Board(); //Create the board for each player
         }
+        this.playerCount = playerCount;
         this.currentPlayerNumber = 0;
         this.state = State.PICK_TILE;
     }
@@ -45,9 +46,9 @@ public class Game implements Model{
 
     @Override
     public void putTile(Position pos) {
-        Tile tuile = pickTile();
+        Tile tuile = this.pickedTile;
         if(this.state != State.PLACE_TILE){
-            throw new IllegalStateException("Etat incorrect : " + this.state);
+            throw new IllegalStateException("Etat incorrect dans : " + this.state);
         }
         if(this.boards[currentPlayerNumber].canBePut(tuile, pos) == false){
             throw new IllegalArgumentException("Position incorrect / impossible de poser la tuile à cette endroit" +
@@ -65,7 +66,7 @@ public class Game implements Model{
         if(this.state != State.TURN_END){
             throw new IllegalStateException("Etat incorrect : " + this.state);
         }
-        if(currentPlayerNumber == playerCount -1){
+        if(currentPlayerNumber == playerCount - 1){
             currentPlayerNumber = 0;
         }
         else{
