@@ -16,7 +16,7 @@ public class Game implements Model{
         if(playerCount < 2 || playerCount >4){
             throw new IllegalArgumentException("Nombre de joueur incorrect : " + playerCount);
         }
-        else if((this.state != State.NOT_STARTED) && (this.state != State.GAME_OVER)){
+        else if((this.state != State.NOT_STARTED) && (getState() != State.GAME_OVER)){
             throw new IllegalStateException("Etat invalide : " + this.state);
         }
         this.boards = new Board[playerCount]; //Create the Board[]
@@ -38,56 +38,121 @@ public class Game implements Model{
             throw new IllegalStateException("Etat incorrect : " + this.state);
         }
         this.state = State.PLACE_TILE;
-        return new Tile((int)(Math.random() * ((20 - 2) + 1)) + 2); //valeur random entre 2 et 20 (inclu)
+        Tile tuile = new Tile((int)(Math.random() * ((20 - 2) + 1)) + 2); //valeur random entre 2 et 20 (inclu)
+        this.pickedTile = tuile;
+        return tuile;
     }
 
     @Override
     public void putTile(Position pos) {
-
+        Tile tuile = pickTile();
+        if(this.state != State.PLACE_TILE){
+            throw new IllegalStateException("Etat incorrect : " + this.state);
+        }
+        if(this.boards[currentPlayerNumber].canBePut(tuile, pos) == false){
+            throw new IllegalArgumentException("Position incorrect / impossible de poser la tuile à cette endroit" +
+                    tuile.getValue() + ", " + pos);
+        }
+        else{
+            Board plateau = this.boards[currentPlayerNumber];
+            plateau.put(tuile, pos);
+            this.state = State.TURN_END;
+        }
     }
 
     @Override
     public void nextPlayer() {
-
+        if(this.state != State.TURN_END){
+            throw new IllegalStateException("Etat incorrect : " + this.state);
+        }
+        if(currentPlayerNumber == playerCount -1){
+            currentPlayerNumber = 0;
+        }
+        else{
+            currentPlayerNumber = currentPlayerNumber + 1;
+            this.state = State.PICK_TILE;
+        }
     }
 
     @Override
     public int getPlayerCount() {
-        return 0;
+        if(this.state != State.NOT_STARTED){
+            throw new IllegalStateException("Etat incorrect : " + this.state);
+        }
+        return this.playerCount;
     }
 
     @Override
     public State getState() {
-        return null;
+        return this.state;
     }
 
     @Override
     public int getCurrentPlayerNumber() {
-        return 0;
+        if((this.state != State.NOT_STARTED) && (this.state != State.GAME_OVER )){
+            throw new IllegalStateException("Etat incorrect : " + this.state);
+        }
+        return this.currentPlayerNumber;
     }
 
     @Override
     public Tile getPickedTile() {
-        return null;
+        if(this.state != State.PLACE_TILE){
+            throw new IllegalStateException("Etat incorrect  : " + this.state);
+        }
+        return this.pickedTile;
     }
 
     @Override
     public boolean isInside(Position pos) {
-        return false;
+        if(pos.getRow() > getBoardSize() - 1 || pos.getColumn() > getBoardSize() -1 || pos.getRow() < 0
+                || pos.getColumn() < 0){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean canTileBePut(Position pos) {
-        return false;
+        if(this.state != State.PLACE_TILE){
+            throw new IllegalStateException("Etat incorrect  : " + this.state);
+        }
+        if(isInside(pos) == false){
+            throw new IllegalArgumentException("Position en dehors du plateau : " + pos);
+        }
+        else{
+            if(this.boards[getCurrentPlayerNumber()].canBePut(getPickedTile(),pos) == true){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 
     @Override
     public Tile getTile(int playerNumber, Position pos) {
-        return null;
+        if(this.state == State.NOT_STARTED){
+            throw new IllegalStateException("Etat incorrect  : " + this.state);
+        }
+        if(isInside(pos) == false || (playerNumber > getPlayerCount() - 1)){
+            throw new IllegalArgumentException("position incorrect / numéro de joueur incorrect : " + pos +", "+
+                    playerNumber);
+        }
+        if(this.boards[playerNumber].getTile(pos) == null){
+            return null;
+        }
+        else{
+            Tile tuile = this.boards[playerNumber].getTile(pos);
+            return tuile;
+        }
     }
 
     @Override
     public int getWinner() {
-        return 0;
+        if(this.state != State.GAME_OVER){
+            throw new IllegalStateException("Etat incorrect : " + this.state);
+        }
+        return this.currentPlayerNumber;
     }
 }
