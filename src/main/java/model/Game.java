@@ -13,11 +13,12 @@ public class Game implements Model{
 
     @Override
     public void start(int playerCount) {
-        if(playerCount < 2 || playerCount >4){
-            throw new IllegalArgumentException("Nombre de joueur incorrect : " + playerCount);
-        }
-        else if((this.state != State.NOT_STARTED) && (this.state != State.GAME_OVER)){
+
+        if((this.state != State.NOT_STARTED) && (this.state != State.GAME_OVER)){
             throw new IllegalStateException("Etat invalide : " + this.state);
+        }
+        else if(playerCount < 2 || playerCount >4){
+            throw new IllegalArgumentException("Nombre de joueur incorrect : " + playerCount);
         }
         this.boards = new Board[playerCount]; //Create the Board[]
         for (int i = 0; i < playerCount; i++) {
