@@ -47,7 +47,7 @@ public interface Model {
     /**
      * Put a tile at the given position. Put the previously picked tile of the
      * current player at the given position on its board.
-     * State becomes TURN_END.
+     * State becomes TURN_END or GAME_OVER.
      *
      * @param pos where to put the tile.
      * @throws IllegalArgumentException if the tile can't be put on that
