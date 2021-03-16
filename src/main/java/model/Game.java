@@ -45,6 +45,11 @@ public class Game implements Model{
         return tuile;
     }
 
+    Tile pickTile(int value) {
+        this.state = State.PLACE_TILE;
+        return new Tile(value);
+    }
+
     @Override
     public void putTile(Position pos) {
         Tile tuile = this.pickedTile;
@@ -83,7 +88,7 @@ public class Game implements Model{
 
     @Override
     public int getPlayerCount() {
-        if(this.state != State.NOT_STARTED){
+        if(this.state == State.NOT_STARTED){
             throw new IllegalStateException("Etat incorrect : " + this.state);
         }
         return this.playerCount;
@@ -96,7 +101,7 @@ public class Game implements Model{
 
     @Override
     public int getCurrentPlayerNumber() {
-        if((this.state != State.NOT_STARTED) && (this.state != State.GAME_OVER )){
+        if((this.state == State.NOT_STARTED) && (this.state == State.GAME_OVER )){
             throw new IllegalStateException("Etat incorrect : " + this.state);
         }
         return this.currentPlayerNumber;
