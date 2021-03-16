@@ -174,7 +174,7 @@ public class Board {
     public boolean canBePut(Tile tuile, Position pos){
         Integer ligne = pos.getRow();
         Integer colonne = pos.getColumn();
-        Integer valTuile = tuile.getValue();
+        Integer valTuile = tuile.getValue(); //Ne comprend pas l'erreur, tu ne peux pas donner une tuile qui est nul.
         //Case first row
         if((parcourirColonneVersHaut(pos) == null || parcourirColonneVersHaut(pos) < valTuile) &&
                 (parcourirColonneVersBas(pos) == null || parcourirColonneVersBas(pos) > valTuile) &&
