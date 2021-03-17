@@ -19,23 +19,6 @@ public class Board {
     }
 
     /*
-    temporary method which displays the table for the tests
-     */
-    public void afficherBoard() {
-        for(int ligne = 0; ligne < this.plateau.length;ligne++){
-            for (int colonne = 0; colonne < this.plateau[0].length; colonne++){
-                if (this.plateau[ligne][colonne] == null){
-                    System.out.print("null ");
-                }
-                else{
-                    System.out.print(this.plateau[ligne][colonne].getValue() + " ");
-                }
-            }
-            System.out.println();
-        }
-    }
-
-    /*
     Allows you to know the size of the tile board and returns it.
     @return Integer the size of the array
     */
