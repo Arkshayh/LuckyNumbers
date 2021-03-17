@@ -18,13 +18,13 @@ public class MyView implements View{
 
     @Override
     public void displayWelcome() {
-        System.out.println("*Bienvenue sur le jeu luckynumbers* par Cotton Ian (version 0.1");
+        System.out.println("*Bienvenue sur le jeu luckynumbers* par Cotton Ian (version 0.1)");
     }
 
     @Override
     public void displayGame() {
         //Header
-        System.out.println("Joueur "+ game.getCurrentPlayerNumber()+1);
+        System.out.println("Joueur "+ (game.getCurrentPlayerNumber()+1));
         Integer taille = 4;
         for (int i = 0; i <taille; i++) {
             if(i == 0){
@@ -42,20 +42,28 @@ public class MyView implements View{
         Integer player = game.getCurrentPlayerNumber();
         Tile valeur;
         for (int j = 0; j < taille; j++) { //row
-            System.out.print((j+1) + "|  ");
+            System.out.print((j+1) + "|");
             for (int k = 0; k < taille; k++) { //column
                 valeur = game.getTile(player, new Position(j,k));
                 if(valeur == null){
-                    System.out.print(".");
+                    if(k == taille -1){
+                        System.out.println("  .");
+                    }
+                    else if(k == 0){
+                        System.out.print(" .");
+                    }
+                    else{
+                        System.out.print("  .");
+                    }
                 }
                 else{
                     if(j == taille -1){
                         if(valeur.getValue() >= 10){
-                            System.out.println(valeur.getValue() + " ");
+                            System.out.println(" "+ valeur.getValue() );
 
                         }
                         else{
-                            System.out.println(valeur.getValue() + "  ");
+                            System.out.println("  " + valeur.getValue());
                         }
                     }
                     else{
@@ -80,14 +88,17 @@ public class MyView implements View{
 
     @Override
     public Integer askPlayerCount() {
-        return game.getPlayerCount();
+        System.out.println("Entrer le nombre de joueur (2 minimum, 4 maximum)");
+        Scanner clavier = new Scanner(System.in);
+        Integer nbPlayer = clavier.nextInt();
+        return nbPlayer;
     }
 
     @Override
     public Position askPosition() {
         System.out.println("Entrer une position.");
         Scanner clavier = new Scanner(System.in);
-        System.out.println("Commencer par indique le numéro de la ligne la ligne : ");
+        System.out.println("Commencer par indique le numéro de la ligne : ");
         Integer ligne = clavier.nextInt() - 1;
         System.out.println("Indiquer le numéro de la colonne : ");
         Integer colonne = clavier.nextInt() - 1;
