@@ -47,6 +47,7 @@ public class Game implements Model{
 
     Tile pickTile(int value) {
         this.state = State.PLACE_TILE;
+        this.pickedTile = new Tile(value);
         return new Tile(value);
     }
 
