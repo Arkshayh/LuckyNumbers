@@ -6,6 +6,8 @@ import model.State;
 import view.MyView;
 import view.View;
 
+import java.util.Scanner;
+
 public class Controller {
     private Game game;
     private View vue;
@@ -18,15 +20,25 @@ public class Controller {
     public void play(){
         this.vue.displayWelcome();
         Integer NbPlayer = vue.askPlayerCount();
-        while(game.getState() != State.GAME_OVER){
+        boolean replay = true;
+        while (replay == true){
             game.start(NbPlayer);
-            game.pickTile();
-            game.putTile(vue.askPosition());
-            if(game.getState() != State.GAME_OVER){
-                game.nextPlayer();
+            while(game.getState() != State.GAME_OVER){
+                game.pickTile();
+                vue.displayGame();
+                game.putTile(vue.askPosition());
+                if(game.getState() != State.GAME_OVER){
+                    game.nextPlayer();
+                }
+            }
+            vue.displayWinner();
+            Scanner clavier = new Scanner(System.in);
+            System.out.println("Vous voulez rejouez 'Y' | 'N'");
+            String rep = clavier.nextLine();
+            if(rep.toLowerCase() == "N"){
+                replay = false;
             }
         }
-        vue.displayWinner();
     }
 
 }
