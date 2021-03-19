@@ -1,15 +1,16 @@
 package model;
 
 
+import controller.Controller;
+import view.MyView;
+import view.View;
+
 public class test {
     public static void main(String[] args) {
-        Model jeu = new Game();
-        jeu.start(2);
-        System.out.println(jeu.getState());
-        jeu.pickTile();
-        System.out.println(jeu.getState());
-        jeu.putTile(new Position(0,0));
-        System.out.println(jeu.getState());
-        jeu.nextPlayer();
+        Game game = new Game();
+        Controller controller = new Controller(game, new MyView(game));
+        controller.play();
+
     }
+
 }

@@ -80,6 +80,7 @@ public class Game implements Model{
         }
         if(currentPlayerNumber == playerCount - 1){
             currentPlayerNumber = 0;
+            this.state = State.PICK_TILE;
         }
         else{
             currentPlayerNumber = currentPlayerNumber + 1;
