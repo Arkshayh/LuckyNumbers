@@ -1,5 +1,11 @@
 package view;
 
+/**
+ * Interface for the myView model.
+ *
+ * @author Cotton Ian|g55019
+ */
+
 import model.Position;
 
 public interface View {
