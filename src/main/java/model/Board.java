@@ -59,9 +59,14 @@ public class Board {
     @return Integer, null | value of the first tile met
      */
     private Integer parcourirLigneVersGauche(Position pos){
+        //if on the left side (column = 0) will return null to avoid Out of bound exception
         if(pos.getColumn() == 0){
             return null;
         }
+        /*
+        Check the line starting from the given position to the left,
+        return the first value found, if there is none return null (no value)
+         */
         Integer VG = 0;
         for (int i = 1; i < this.plateau.length -1; i++) {
             if(pos.getColumn()  - i >= 0){
@@ -74,18 +79,23 @@ public class Board {
                 }
             }
         }
+        //If no tile on the left return null
         return null;
     }
+
     /*
     Go through a row of the board and return the value of the first element on the right, if there is none: returns null
     @param Position | position of the tile that we want to put on the board
     @return Integer, null | value of the first tile met
      */
     private Integer parcourirLigneVersDroite(Position pos){
+        //If on the right side (column = board.Length - 1), return null to avoid out of bound Exeption
         if(pos.getColumn() == this.plateau[0].length-1){
             return null;
         }
         Integer VD = 0;
+        //Check the line starting from the given position to the right, return the first value found,
+        // if there is none return null (no value)
         for (int i = 1; i < this.plateau.length -1; i++) {
             if(pos.getColumn() + i <= this.plateau[0].length -1){
                 if(plateau[pos.getRow()][pos.getColumn() + i] == null){
@@ -99,15 +109,19 @@ public class Board {
         }
         return null;
     }
+
     /*
     Go through a column of the board and return the value of the first element on the top, if there is none: returns null
     @param Position | position of the tile that we want to put on the board
     @return Integer, null | value of the first tile met
      */
     private Integer parcourirColonneVersHaut(Position pos){
+        //If we're on the first line return null to avoir Out of bound Exception.
         if(pos.getRow() == 0){
             return null;
         }
+        //Go through the column starting from the given position upwards,
+        // return the first value found, if there is none return null (no value)
         Integer VH = 0;
         for (int i = 1; i < this.plateau[0].length - 1; i++) {
             if(pos.getRow() - i >= 0){
@@ -129,9 +143,12 @@ public class Board {
     @return Integer, null | value of the first tile met
      */
     private Integer parcourirColonneVersBas(Position pos){
+        //If on the last line, return null to avoir oob
         if(pos.getRow() == this.plateau.length - 1){
             return null;
         }
+        //Go through the column starting from the given position down,
+        // return the first value found, if there is none return null (no value)
         Integer VB =0 ;
         for (int i = 1; i < this.plateau[0].length - 1; i++) {
             if(pos.getRow() + i <= this.plateau.length - 1){
@@ -144,6 +161,7 @@ public class Board {
                 }
             }
         }
+        //no value
         return null;
     }
 
@@ -157,8 +175,14 @@ public class Board {
     public boolean canBePut(Tile tuile, Position pos){
         Integer ligne = pos.getRow();
         Integer colonne = pos.getColumn();
-        Integer valTuile = tuile.getValue(); //Ne comprend pas l'erreur, tu ne peux pas donner une tuile qui est nul.
-        //Case first row
+        Integer valTuile = tuile.getValue();
+
+        /*
+        Get the value of the tile above / to the left / to the right / to the bottom of the given tile position
+        If their value does not hinder the fact of being able to place the tile returns true,
+        we can well place the tile otherwise returns false impossible
+        (null -> no tile on this side.)
+         */
         if((parcourirColonneVersHaut(pos) == null || parcourirColonneVersHaut(pos) < valTuile) &&
                 (parcourirColonneVersBas(pos) == null || parcourirColonneVersBas(pos) > valTuile) &&
                 (parcourirLigneVersGauche(pos) == null || parcourirLigneVersGauche(pos) < valTuile) &&
@@ -174,8 +198,6 @@ public class Board {
     Add a tile in the array at a given position, it is assumed that the position is on the board
     @param Tile, Position | the position is on the board
      */
-
-
     public void put(Tile tuile, Position pos){
         this.plateau[pos.getRow()][pos.getColumn()] = tuile;
     }
