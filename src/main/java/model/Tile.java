@@ -16,7 +16,7 @@ public class Tile {
     @param Integer, number between 1 and 20
      */
     public Tile(Integer value) {
-        if(value < 1 || value > 20){
+        if(value < 2 || value > 20){
             throw new IllegalArgumentException("Valeur de la tuile incorrecte");
         }
         this.value = value;
