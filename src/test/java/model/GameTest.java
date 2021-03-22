@@ -105,5 +105,55 @@ public class GameTest {
         assertEquals(0, game.getCurrentPlayerNumber());
     }
 
-    /* === À vous de compléter... === */
+    @Test 
+    public void get_board_size_4(){
+        game.start(2);
+        assertEquals(4, game.getBoardSize());
+    }
+    
+    @Test
+    public void pick_tile_when_state_incorrect_Exception(){
+        game.start(2);
+        game.pickTile(5);
+        assertThrows(IllegalStateException.class,
+                () -> game.pickTile(10)); 
+    }
+    
+    @Test
+    public void pick_tile_when_state_ok(){
+        game.start(2);
+        game.pickTile(5);
+    }
+    
+    @Test
+    public void pick_tile_when_value_ok(){
+        game.start(2);
+        game.pickTile(5);
+    }
+    
+    @Test
+    public void pick_tile_when_value_max(){
+        game.start(2);
+        game.pickTile(20);
+    }
+    
+    @Test
+    public void pick_tile_when_value_min(){
+        game.start(2);
+        game.pickTile(20);
+    }
+    
+    @Test
+    public void pick_tile_when_value_too_big_Exeption(){
+        game.start(2);
+        assertThrows(IllegalArgumentException.class,
+                () -> game.pickTile(21)); 
+    }
+    
+    @Test
+    public void pick_tile_when_value_too_small_Exeption(){
+        game.start(2);
+        assertThrows(IllegalArgumentException.class,
+                () -> game.pickTile(-4)); 
+    }
 }
