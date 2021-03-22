@@ -48,8 +48,8 @@ public class Board {
      */
     public Tile getTile(Position pos){
 
-        Integer ligne  = pos.getRow();
-        Integer colonne = pos.getColumn();
+        int ligne  = pos.getRow();
+        int colonne = pos.getColumn();
         return this.plateau[ligne][colonne];
     }
 
