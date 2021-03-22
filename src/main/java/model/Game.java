@@ -45,7 +45,10 @@ public class Game implements Model{
         return tuile;
     }
 
-    Tile pickTile(int value) {
+    public Tile pickTile(int value) {
+        if(this.state != State.PICK_TILE){
+            throw new IllegalStateException("Etat incorrect : " + this.state);
+        }
         this.state = State.PLACE_TILE;
         this.pickedTile = new Tile(value);
         return new Tile(value);
