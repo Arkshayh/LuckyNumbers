@@ -1,5 +1,17 @@
 package model;
 
+/**
+ * @author g55019 / Cotton Ian
+ * A class game has a State state
+ * The amount of player Int
+ * The current number player
+ * A tab of board (one for each player)
+ * the value of the tile picked
+ *
+ * This class contains the method from Model.java
+ * This makes it possible to advance the game and its state
+ */
+
 public class Game implements Model{
     private State state;
     private Integer playerCount;
