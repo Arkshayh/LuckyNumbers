@@ -1,3 +1,5 @@
+package LuckyNumbers;
+
 import controller.Controller;
 import model.Game;
 import view.MyView;
