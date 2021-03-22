@@ -33,8 +33,8 @@ public class Board {
      */
 
     public boolean isInside(Position pos){
-        Integer ligne = pos.getRow();
-        Integer colonne = pos.getColumn();
+        int ligne = pos.getRow();
+        int colonne = pos.getColumn();
         if( (ligne < getSize() && ligne >= 0) && (colonne < getSize() && colonne >= 0)){
             return true;
         }
