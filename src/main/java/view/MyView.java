@@ -1,5 +1,12 @@
 package view;
 
+/**
+ *
+ * @author Cotton Ian | g55019
+ * contains the method from View interface
+ * The method has as job to diplay information/question for players
+ */
+
 import model.Game;
 import model.Position;
 import model.Model;
