@@ -14,8 +14,8 @@ package model;
 
 public class Game implements Model{
     private State state;
-    private Integer playerCount;
-    private Integer currentPlayerNumber;
+    private int playerCount;
+    private int currentPlayerNumber;
     private Board[] boards;
     private Tile pickedTile;
 
