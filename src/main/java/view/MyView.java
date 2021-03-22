@@ -5,9 +5,6 @@ import model.Position;
 import model.Model;
 import model.Tile;
 
-import java.awt.font.GlyphMetrics;
-import java.lang.reflect.Executable;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class MyView implements View{
