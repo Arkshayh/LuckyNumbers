@@ -6,6 +6,7 @@ import model.Model;
 import model.Tile;
 
 import java.awt.font.GlyphMetrics;
+import java.lang.reflect.Executable;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
@@ -46,7 +47,7 @@ public class MyView implements View{
             for (int k = 0; k < taille; k++) { //column
                 valeur = game.getTile(player, new Position(j,k));
                 if(valeur == null){
-                    if(k == taille -1){
+                    if(k == (taille -1)){
                         System.out.println("  .");
                     }
                     else if(k == 0){
@@ -57,7 +58,7 @@ public class MyView implements View{
                     }
                 }
                 else{
-                    if(j == taille -1){
+                    if(k == (taille -1)){
                         if(valeur.getValue() >= 10){
                             System.out.println(" "+ valeur.getValue() );
 
@@ -68,10 +69,20 @@ public class MyView implements View{
                     }
                     else{
                         if(valeur.getValue() >= 10){
-                            System.out.print(valeur.getValue() + " ");
+                            if(j == 0){
+                                System.out.print(valeur.getValue());
+                            }
+                            else{
+                                System.out.print(" " + valeur.getValue());
+                            }
                         }
                         else {
-                            System.out.print(valeur.getValue() + "  ");
+                            if(k == 0){
+                                System.out.print(" "+valeur.getValue());
+                            }
+                            else{
+                                System.out.print("  " + valeur.getValue());
+                            }
                         }
                     }
                 }
@@ -83,7 +94,7 @@ public class MyView implements View{
 
     @Override
     public void displayWinner() {
-        System.out.println("Le gagnant est le joueur : " + game.getWinner());
+        System.out.println("Le gagnant est le joueur : " + (game.getWinner() + 1));
     }
 
     @Override
@@ -99,18 +110,41 @@ public class MyView implements View{
         System.out.println("Entrer une position.");
         Scanner clavier = new Scanner(System.in);
         System.out.println("Commencer par indique le numéro de la ligne : ");
-        Integer ligne = clavier.nextInt() - 1;
+        Integer ligne = clavier.nextInt();
+        ligne = ligne - 1;
         System.out.println("Indiquer le numéro de la colonne : ");
-        Integer colonne = clavier.nextInt() - 1;
+        Integer colonne = clavier.nextInt();
+        colonne = colonne - 1;
         Position pos = new Position(ligne, colonne);
-
-        while (game.canTileBePut(pos) == false){
-            System.out.println("position incorrect !");
-            System.out.println("Indiquer une ligne : ");
-            ligne = clavier.nextInt();
-            System.out.println("Indiquer une colonne : ");
-            colonne = clavier.nextInt();
-            pos = new Position(ligne, colonne);
+        boolean test = false;
+        while(test == false){
+            try {
+                if(game.canTileBePut(pos) == true){
+                    test = true;
+                }
+                else{
+                    while (game.canTileBePut(pos) == false) {
+                        System.out.println("position incorrect !");
+                        System.out.println("Indiquer une ligne : ");
+                        ligne = clavier.nextInt();
+                        ligne = ligne - 1;
+                        System.out.println("Indiquer une colonne : ");
+                        colonne = clavier.nextInt();
+                        colonne = colonne - 1;
+                        pos = new Position(ligne, colonne);
+                    }
+                }
+            }
+            catch(Exception e){
+                System.out.println("position incorrect !");
+                System.out.println("Indiquer une ligne : ");
+                ligne = clavier.nextInt();
+                ligne = ligne - 1;
+                System.out.println("Indiquer une colonne : ");
+                colonne = clavier.nextInt();
+                colonne = colonne - 1;
+                pos = new Position(ligne, colonne);
+            }
         }
         return pos;
     }
