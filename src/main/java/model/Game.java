@@ -39,9 +39,13 @@ public class Game implements Model{
         if(this.state != State.PICK_TILE){
             throw new IllegalStateException("Etat incorrect : " + this.state);
         }
+
+        //random value between 2 and 20 (included)
+        Tile tuile = new Tile((int)(Math.random() * ((20 - 2) + 1)) + 2);
+
         this.state = State.PLACE_TILE;
-        Tile tuile = new Tile((int)(Math.random() * ((20 - 2) + 1)) + 2); //valeur random entre 2 et 20 (inclu)
         this.pickedTile = tuile;
+
         return tuile;
     }
 
