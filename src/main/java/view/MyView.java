@@ -21,6 +21,7 @@ public class MyView implements View{
 
     @Override
     public void displayGame() {
+
         //Header
         System.out.println("Joueur "+ (game.getCurrentPlayerNumber()+1));
         Integer taille = 4;
@@ -34,58 +35,87 @@ public class MyView implements View{
             System.out.print(i+1);
         }
         System.out.println();
+
+
+        //transition bar
         System.out.println("-------------");
 
-        //Body
+
+        //Each line/column of the board. Display line per line
         Integer player = game.getCurrentPlayerNumber();
         Tile valeur;
-        for (int j = 0; j < taille; j++) { //row
+        for (int j = 0; j < taille; j++) { //For each row display "|" at the beginning
             System.out.print((j+1) + "|");
+
             for (int k = 0; k < taille; k++) { //column
                 valeur = game.getTile(player, new Position(j,k));
-                if(valeur == null){
-                    if(k == (taille -1)){
-                        System.out.println("  .");
-                    }
-                    else if(k == 0){
+
+                /*
+                If the value < 10 the classic display is two space and the value (__value)
+                If the value >= 10 one space  (_value)
+                for no value 2 space and a . (__.)
+
+                The fist value on the  line has one less space
+
+                The last value on the has to have a println instead of a print
+                 */
+
+                //To display the first tile of the line | There is one less space when you're the fist tile of a line
+                if(k == 0){
+
+                    if(valeur == null){
                         System.out.print(" .");
                     }
+
+                    else if(valeur.getValue() < 10){
+                        System.out.print(" " + valeur);
+                    }
+
                     else{
-                        System.out.print("  .");
+                        System.out.print(valeur);
                     }
                 }
-                else{
-                    if(k == (taille -1)){
-                        if(valeur.getValue() >= 10){
-                            System.out.println(" "+ valeur.getValue() );
 
-                        }
-                        else{
-                            System.out.println("  " + valeur.getValue());
-                        }
+                //To display the last tile of a line (it must be a println)
+                else if(k == game.getBoardSize() - 1){
+
+                    if(valeur == null){
+                        System.out.println("  .");
                     }
+
+                    else if(valeur.getValue() < 10){
+                        System.out.println("  "+valeur);
+                    }
+
                     else{
-                        if(valeur.getValue() >= 10){
-                            if(j == 0){
-                                System.out.print(valeur.getValue());
-                            }
-                            else{
-                                System.out.print(" " + valeur.getValue());
-                            }
-                        }
-                        else {
-                            if(k == 0){
-                                System.out.print(" "+valeur.getValue());
-                            }
-                            else{
-                                System.out.print("  " + valeur.getValue());
-                            }
-                        }
+                        System.out.println(" " + valeur);
                     }
+
+                }
+
+                //To diplay the tile in the middle of the line classic diplay 2 space and value
+                else{
+
+                    if(valeur == null){
+                        System.out.print("  .");
+                    }
+
+                    else if(valeur.getValue() < 10){
+                        System.out.print("  "+valeur);
+                    }
+
+                    else{
+                        System.out.println(" " + valeur);
+                    }
+
                 }
             }
         }
+
+        //Transition
         System.out.println("-------------");
+
+        //Show the value of the pickedtile
         System.out.println("Tuile choisie : " + game.getPickedTile());
     }
 
