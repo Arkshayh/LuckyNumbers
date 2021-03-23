@@ -2,6 +2,8 @@ package model;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 
 /**
@@ -155,5 +157,43 @@ public class GameTest {
         game.start(2);
         assertThrows(IllegalArgumentException.class,
                 () -> game.pickTile(-4)); 
+    }
+
+    @Test
+    public void put_Tile_StateExeption(){
+        game.start(2);
+        assertThrows(IllegalStateException.class,
+                () -> game.putTile(new Position(0,0)));
+    }
+
+    @Test
+    public void put_Tile_ok(){
+        game.start(2);
+        game.pickTile(5);
+        game.putTile(new Position(2,2));
+    }
+
+    @Test
+    public void put_Tile_wrong_position(){
+        game.start(2);
+        game.pickTile(5);
+        assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> game.putTile(new Position(-1,0)));
+    }
+
+    @Test
+    public void next_player_ok(){
+        game.start(2);
+        game.pickTile(5);
+        game.putTile(new Position(2,2));
+        game.nextPlayer();
+    }
+
+    @Test
+    public void next_player_State_Exception(){
+        game.start(2);
+        game.pickTile(5);
+        assertThrows(IllegalStateException.class,
+                () -> game.nextPlayer());
     }
 }
