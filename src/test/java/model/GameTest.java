@@ -196,4 +196,68 @@ public class GameTest {
         assertThrows(IllegalStateException.class,
                 () -> game.nextPlayer());
     }
+
+    @Test
+    public void get_current_player_number_ok(){
+        game.start(2);
+        game.pickTile(5);
+        game.getCurrentPlayerNumber();
+    }
+
+    @Test
+    public void get_current_player_number_State_Exception(){
+        Game jeu = new Game();
+        assertThrows(IllegalStateException.class,
+                () -> jeu.getCurrentPlayerNumber());
+    }
+
+    @Test
+    public void is_Inside_true_00(){
+        game.start(2);
+        assertTrue(game.isInside(new Position(0,0)));
+    }
+
+    @Test
+    public void is_Inside_true_03(){
+        game.start(2);
+        assertTrue(game.isInside(new Position(0,3)));
+    }
+
+    @Test
+    public void is_Inside_true_30(){
+        game.start(2);
+        assertTrue(game.isInside(new Position(3,0)));
+    }
+
+    @Test
+    public void is_Inside_true_33(){
+        game.start(2);
+        assertTrue(game.isInside(new Position(3,3)));
+    }
+
+    @Test
+    public void is_Inside_false_503(){
+        game.start(2);
+        assertFalse(game.isInside(new Position(50,3)));
+    }
+    @Test
+    public void is_Inside_false_negatif3(){
+        game.start(2);
+        assertFalse(game.isInside(new Position(-50,3)));
+    }
+    @Test
+    public void is_Inside_false_50negatif3(){
+        game.start(2);
+        assertFalse(game.isInside(new Position(50,-3)));
+    }
+    @Test
+    public void is_Inside_false_5050(){
+        game.start(2);
+        assertFalse(game.isInside(new Position(-50,50)));
+    }
+    @Test
+    public void is_Inside_false_44(){
+        game.start(2);
+        assertFalse(game.isInside(new Position(4,4)));
+    }
 }
