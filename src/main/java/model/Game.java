@@ -122,7 +122,10 @@ public class Game implements Model{
 
     @Override
     public int getCurrentPlayerNumber() {
-        if((this.state == State.NOT_STARTED) && (this.state == State.GAME_OVER )){
+        if(this.state == State.NOT_STARTED){
+            throw new IllegalStateException("Etat incorrect : " + this.state);
+        }
+        else if(this.state == State.GAME_OVER){
             throw new IllegalStateException("Etat incorrect : " + this.state);
         }
         return this.currentPlayerNumber;
