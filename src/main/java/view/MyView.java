@@ -52,19 +52,8 @@ public class MyView implements View{
             for (int k = 0; k < taille; k++) { //column
                 valeur = game.getTile(player, new Position(j,k));
 
-                /*
-                If the value < 10 the classic display is two space and the value (__value)
-                If the value >= 10 one space  (_value)
-                for no value 2 space and a . (__.)
-
-                The fist value on the  line has one less space
-
-                The last value on the has to have a println instead of a print
-                 */
-
                 //To display the first tile of the line | There is one less space when you're the fist tile of a line
                 if(k == 0){
-
                     if(valeur == null){
                         System.out.print(" .");
                     }
