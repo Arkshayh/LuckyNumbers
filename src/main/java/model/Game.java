@@ -157,12 +157,7 @@ public class Game implements Model{
             throw new IllegalArgumentException("Position en dehors du plateau : " + pos);
         }
         else{
-            if(this.boards[getCurrentPlayerNumber()].canBePut(getPickedTile(),pos) == true){
-                return true;
-            }
-            else{
-                return false;
-            }
+            return this.boards[getCurrentPlayerNumber()].canBePut(getPickedTile(),pos);
         }
     }
 
