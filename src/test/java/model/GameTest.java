@@ -260,4 +260,74 @@ public class GameTest {
         game.start(2);
         assertFalse(game.isInside(new Position(4,4)));
     }
+
+    @Test
+    public void can_tile_be_put_state_exception(){
+        game.start(2);
+        assertThrows(IllegalStateException.class,
+            () -> game.canTileBePut(new Position(0,0)));
+    }
+
+    @Test
+    public void can_tile_be_put_wrong_position_exception(){
+        game.start(2);
+        game.pickTile();
+        assertThrows(IllegalArgumentException.class,
+                () -> game.canTileBePut(new Position(-1,0)));
+    }
+    @Test
+    public void can_tile_be_put_wrong_position2_exception(){
+        game.start(2);
+        game.pickTile();
+        assertThrows(IllegalArgumentException.class,
+                () -> game.canTileBePut(new Position(0,-1)));
+    }
+    @Test
+    public void can_tile_be_put_wrong_position3_exception(){
+        game.start(2);
+        game.pickTile();
+        assertThrows(IllegalArgumentException.class,
+                () -> game.canTileBePut(new Position(4,0)));
+    }
+    @Test
+    public void can_tile_be_put_wrong_position4_exception(){
+        game.start(2);
+        game.pickTile();
+        assertThrows(IllegalArgumentException.class,
+                () -> game.canTileBePut(new Position(-1,4)));
+    }
+
+    @Test
+    public void get_tile_state_exception(){
+        Game jeu = new Game();
+        assertThrows(IllegalStateException.class,
+                () -> jeu.getTile(0, new Position(0,0)));
+    }
+
+    @Test
+    public void get_tile_wrong_player_number_Exception(){
+        game.start(2);
+        assertThrows(IllegalArgumentException.class,
+                () -> game.getTile(3, new Position(0,0)));
+    }
+
+    @Test
+    public void get_tile_wrong_position_Exception(){
+        game.start(2);
+        assertThrows(IllegalArgumentException.class,
+                () -> game.getTile(1, new Position(-1,-2)));
+    }
+
+    @Test
+    public void get_winner_state_Exception(){
+        game.start(2);
+        assertThrows(IllegalStateException.class,
+                () -> game.getWinner());
+    }
+
+    @Test
+    public void get_winner_ok(){
+        fullPlay();
+        game.getWinner();
+    }
 }
