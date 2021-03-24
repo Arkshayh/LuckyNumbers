@@ -68,11 +68,9 @@ public class MyView implements View{
                     if(valeur == null){
                         System.out.print(" .");
                     }
-
                     else if(valeur.getValue() < 10){
                         System.out.print(" " + valeur);
                     }
-
                     else{
                         System.out.print(valeur);
                     }
@@ -80,36 +78,28 @@ public class MyView implements View{
 
                 //To display the last tile of a line (it must be a println)
                 else if(k == game.getBoardSize() - 1){
-
                     if(valeur == null){
                         System.out.println("  .");
                     }
-
                     else if(valeur.getValue() < 10){
                         System.out.println("  "+valeur);
                     }
-
                     else{
                         System.out.println(" " + valeur);
                     }
-
                 }
 
                 //To diplay the tile in the middle of the line classic diplay 2 space and value
                 else{
-
                     if(valeur == null){
                         System.out.print("  .");
                     }
-
                     else if(valeur.getValue() < 10){
                         System.out.print("  "+valeur);
                     }
-
                     else{
                         System.out.print(" " + valeur);
                     }
-
                 }
             }
         }
