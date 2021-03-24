@@ -12,7 +12,7 @@ public class Position {
     /* Constructor of a position The values of the row and the column of the position are required.
     @param Integer, Integer value of row and column
     */
-    public Position(Integer row, Integer column) {
+    public Position(int row, int column) {
         this.row = row;
         this.column = column;
     }
@@ -21,7 +21,7 @@ public class Position {
     Get row
     @return Integer Returns the value of the row of a position
      */
-    public Integer getRow() {
+    public int getRow() {
         return row;
     }
 
@@ -29,7 +29,7 @@ public class Position {
      Get column
      @return Integer Returns the value of the column of a position
      */
-    public Integer getColumn() {
+    public int getColumn() {
         return column;
     }
 

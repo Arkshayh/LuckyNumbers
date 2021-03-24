@@ -19,7 +19,7 @@ public class Controller {
 
     public void play(){
         this.vue.displayWelcome();
-        Integer NbPlayer = vue.askPlayerCount();
+        int NbPlayer = vue.askPlayerCount();
         boolean replay = true;
         while (replay == true){
             game.start(NbPlayer);

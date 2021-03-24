@@ -29,7 +29,7 @@ public interface View {
      * asks how many players are in the game (from 2 to 4).
      * @return Integer, the amount of player (from 2 to 4).
      */
-    Integer askPlayerCount();
+    int askPlayerCount();
 
     /**
      * asks the user to enter a row number and a column number and returns them as a position.

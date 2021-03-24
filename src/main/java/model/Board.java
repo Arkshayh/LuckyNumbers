@@ -22,8 +22,8 @@ public class Board {
     Allows you to know the size of the tile board and returns it.
     @return Integer the size of the array
     */
-    public Integer getSize(){
-        Integer taille = this.plateau.length;
+    public int getSize(){
+        int taille = this.plateau.length;
         return taille;
     }
 
@@ -161,9 +161,9 @@ public class Board {
     @return boolean |true if the tile can be put at the given position if not -> false
      */
     public boolean canBePut(Tile tuile, Position pos){
-        Integer ligne = pos.getRow();
-        Integer colonne = pos.getColumn();
-        Integer valTuile = tuile.getValue();
+        int ligne = pos.getRow();
+        int colonne = pos.getColumn();
+        int valTuile = tuile.getValue();
 
         /*
         Get the value of the tile above / to the left / to the right / to the bottom of the given tile position

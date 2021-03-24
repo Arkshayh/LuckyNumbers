@@ -119,10 +119,10 @@ public class MyView implements View{
     }
 
     @Override
-    public Integer askPlayerCount() {
+    public int askPlayerCount() {
         System.out.println("Entrer le nombre de joueur (2 minimum, 4 maximum)");
         Scanner clavier = new Scanner(System.in);
-        Integer nbPlayer = clavier.nextInt();
+        int nbPlayer = clavier.nextInt();
         return nbPlayer;
     }
 
@@ -131,10 +131,10 @@ public class MyView implements View{
         System.out.println("Entrer une position.");
         Scanner clavier = new Scanner(System.in);
         System.out.println("Commencer par indique le numéro de la ligne : ");
-        Integer ligne = clavier.nextInt();
+        int ligne = clavier.nextInt();
         ligne = ligne - 1;
         System.out.println("Indiquer le numéro de la colonne : ");
-        Integer colonne = clavier.nextInt();
+        int colonne = clavier.nextInt();
         colonne = colonne - 1;
         Position pos = new Position(ligne, colonne);
         boolean test = false;
