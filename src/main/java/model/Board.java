@@ -70,10 +70,7 @@ public class Board {
         Integer VG = 0;
         for (int i = 1; i < this.plateau.length -1; i++) {
             if(pos.getColumn()  - i >= 0){
-                if(plateau[pos.getRow()][pos.getColumn()  - i] == null){
-
-                }
-                else {
+                if(plateau[pos.getRow()][pos.getColumn()  - i] != null){
                     VG = plateau[pos.getRow()][pos.getColumn() - i].getValue();
                     return VG;
                 }
@@ -98,10 +95,7 @@ public class Board {
         // if there is none return null (no value)
         for (int i = 1; i < this.plateau.length -1; i++) {
             if(pos.getColumn() + i <= this.plateau[0].length -1){
-                if(plateau[pos.getRow()][pos.getColumn() + i] == null){
-
-                }
-                else{
+                if(plateau[pos.getRow()][pos.getColumn() + i] != null){
                     VD = plateau[pos.getRow()][pos.getColumn() + i].getValue();
                     return VD;
                 }
@@ -125,10 +119,7 @@ public class Board {
         Integer VH = 0;
         for (int i = 1; i < this.plateau[0].length - 1; i++) {
             if(pos.getRow() - i >= 0){
-                if(plateau[pos.getRow() - i][pos.getColumn()] == null){
-
-                }
-                else {
+                if(plateau[pos.getRow() - i][pos.getColumn()] != null){
                     VH = plateau[pos.getRow() - i][pos.getColumn()].getValue();
                     return VH;
                 }
@@ -152,10 +143,7 @@ public class Board {
         Integer VB =0 ;
         for (int i = 1; i < this.plateau[0].length - 1; i++) {
             if(pos.getRow() + i <= this.plateau.length - 1){
-                if(plateau[pos.getRow() + i][pos.getColumn()] == null){
-
-                }
-                else{
+                if(plateau[pos.getRow() + i][pos.getColumn()] != null){
                     VB = plateau[pos.getRow() + i][pos.getColumn()].getValue();
                     return VB;
                 }
