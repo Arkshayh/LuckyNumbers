@@ -26,12 +26,9 @@ public class MyView implements View{
         System.out.println("*Bienvenue sur le jeu luckynumbers* par Cotton Ian (version 0.1)");
     }
 
-    @Override
-    public void displayGame() {
-
+    private void displayHeader(int taille){
         //Header
         System.out.println("Joueur "+ (game.getCurrentPlayerNumber()+1));
-        Integer taille = 4;
         for (int i = 0; i <taille; i++) {
             if(i == 0){
                 System.out.print("   ");
@@ -43,13 +40,11 @@ public class MyView implements View{
         }
         System.out.println();
 
+    }
 
-        //transition bar
-        System.out.println("-------------");
-
-
+    private void displayBody(int taille){
         //Each line/column of the board. Display line per line
-        Integer player = game.getCurrentPlayerNumber();
+        int player = game.getCurrentPlayerNumber();
         Tile valeur;
         for (int j = 0; j < taille; j++) { //For each row display "|" at the beginning
             System.out.print((j+1) + "|");
@@ -112,12 +107,25 @@ public class MyView implements View{
                     }
 
                     else{
-                        System.out.println(" " + valeur);
+                        System.out.print(" " + valeur);
                     }
 
                 }
             }
         }
+    }
+
+
+
+    @Override
+    public void displayGame() {
+        int taille = 4;
+        displayHeader(taille);
+
+        //transition bar
+        System.out.println("-------------");
+
+        displayBody(taille);
 
         //Transition
         System.out.println("-------------");
