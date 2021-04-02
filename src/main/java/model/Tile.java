@@ -11,9 +11,9 @@ package model;
 public class Tile {
     private Integer value;
 
-    /*
-    Constructor, builds a tile with an attribute value between 1 and 20 (included)
-    @param Integer, number between 1 and 20
+    /**
+     *Constructor, builds a tile with an attribute value between 1 and 20 (included)
+     *@param Integer, number between 1 and 20
      */
     public Tile(Integer value) {
         if(value < 1 || value > 20){
@@ -23,10 +23,10 @@ public class Tile {
         this.value = value;
     }
 
-    /*
-    Getter
-    @return Integer, tile value between 1 & 20 (inclusive)
-    */
+    /**
+     *Getter
+     *@return Integer, tile value between 1 & 20 (inclusive)
+     */
     public Integer getValue() {
         return value;
     }

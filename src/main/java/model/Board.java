@@ -18,18 +18,18 @@ public class Board {
         this.plateau = plateaudeTuile;
     }
 
-    /*
-    Allows you to know the size of the tile board and returns it.
-    @return Integer the size of the array
+    /**
+    *Allows you to know the size of the tile board and returns it.
+    *@return Integer the size of the array
     */
     public int getSize(){
         int taille = this.plateau.length;
         return taille;
     }
 
-    /*
-     Used to find out if a given position is in the board returns a boolean.
-     @return boolean, true if in tray otherwise false
+    /**
+     *Used to find out if a given position is in the board returns a boolean.
+     *@return boolean, true if in tray otherwise false
      */
 
     public boolean isInside(Position pos){
@@ -41,10 +41,10 @@ public class Board {
         return false;
     }
 
-    /*
-    Returns the board tile at a given position.
-    @param Position,  The position of the tile we want
-    @return Tile, The tile at the given position
+    /**
+     *Returns the board tile at a given position.
+     *@param Position,  The position of the tile we want
+     *@return Tile, The tile at the given position
      */
     public Tile getTile(Position pos){
 
@@ -53,10 +53,10 @@ public class Board {
         return this.plateau[ligne][colonne];
     }
 
-    /*
-    Go through a row of the board and return the value of the first element on the left, if there is none: returns null
-    @param Position | position of the tile that we want to put on the board
-    @return Integer, null | value of the first tile met
+    /**
+     *Go through a row of the board and return the value of the first element on the left, if there is none: returns null
+     *@param Position | position of the tile that we want to put on the board
+     *@return Integer, null | value of the first tile met
      */
     private Integer parcourirLigneVersGauche(Position pos){
         //if on the left side (column = 0) will return null to avoid Out of bound exception
@@ -80,10 +80,10 @@ public class Board {
         return null;
     }
 
-    /*
-    Go through a row of the board and return the value of the first element on the right, if there is none: returns null
-    @param Position | position of the tile that we want to put on the board
-    @return Integer, null | value of the first tile met
+    /**
+     *Go through a row of the board and return the value of the first element on the right, if there is none: returns null
+     *@param Position | position of the tile that we want to put on the board
+     *@return Integer, null | value of the first tile met
      */
     private Integer parcourirLigneVersDroite(Position pos){
         //If on the right side (column = board.Length - 1), return null to avoid out of bound Exeption
@@ -104,10 +104,10 @@ public class Board {
         return null;
     }
 
-    /*
-    Go through a column of the board and return the value of the first element on the top, if there is none: returns null
-    @param Position | position of the tile that we want to put on the board
-    @return Integer, null | value of the first tile met
+    /**
+     *Go through a column of the board and return the value of the first element on the top, if there is none: returns null
+     *@param Position | position of the tile that we want to put on the board
+     *@return Integer, null | value of the first tile met
      */
     private Integer parcourirColonneVersHaut(Position pos){
         //If we're on the first line return null to avoir Out of bound Exception.
@@ -127,11 +127,11 @@ public class Board {
         }
         return null;
     }
-    /*
-    Go through a column of the board and return the value of the first element on the bottom,
-    if there is none: returns null
-    @param Position | position of the tile that we want to put on the board
-    @return Integer, null | value of the first tile met
+    /**
+     * Go through a column of the board and return the value of the first element on the bottom,
+     * if there is none: returns null
+     * @param Position | position of the tile that we want to put on the board
+     * @return Integer, null | value of the first tile met
      */
     private Integer parcourirColonneVersBas(Position pos){
         //If on the last line, return null to avoir oob
@@ -153,12 +153,12 @@ public class Board {
         return null;
     }
 
-    /*
-    Return a boolean if the tile at the given position is Bigger or equals to the value of the top and left tile
-    the methode && bot and right < tile given return true else false
-
-    @param Tile,Position | a Tile and a Position if the position is OOB -> exception is thrown
-    @return boolean |true if the tile can be put at the given position if not -> false
+    /**
+     * Return a boolean if the tile at the given position is Bigger or equals to the value of the top and left tile
+     *     the methode && bot and right < tile given return true else false
+     *
+     *     @param Tile , Position | a Tile and a Position if the position is OOB -> exception is thrown
+     *     @return Boolean |true if the tile can be put at the given position if not -> false
      */
     public boolean canBePut(Tile tuile, Position pos){
         int ligne = pos.getRow();

@@ -12,11 +12,19 @@ public class Controller {
     private Game game;
     private View vue;
 
+    /**
+     * Constructor
+     * @param game
+     * @param vue
+     */
     public Controller(Game game, View vue) {
         this.game = game;
         this.vue = vue;
     }
 
+    /**
+     * manages the game from start to finish. It is driven by the state of the game
+     */
     public void play(){
         this.vue.displayWelcome();
         int NbPlayer = vue.askPlayerCount();
