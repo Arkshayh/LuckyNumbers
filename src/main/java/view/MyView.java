@@ -195,11 +195,21 @@ public class MyView implements View{
     }
 
     @Override
-    public void chooseTile(int choix){
+    public int chooseTile(int choix){
         Scanner clavier = new Scanner(System.in);
         Tile tuile;
+        int rep;
+
         if(choix == 1){
             tuile = game.pickFaceDownTile();
+            System.out.println("Votre tuile : " + tuile);
+            System.out.println("Taper 1 si vous voulez placer votre tuile, taper 2 si vous voulez la drop :");
+            rep = clavier.nextInt();
+            while(rep != 1 && rep != 2) {
+                System.out.println("Erreur");
+                System.out.println("Taper 1 pour placer votre tuile , taper 2 pour la drop");
+                rep = clavier.nextInt();
+            }
         }
         else{
             System.out.println("Entrer la valeur de la tuile que vous voulez choisir : ");
@@ -213,7 +223,9 @@ public class MyView implements View{
                 tuile = new Tile(val);
             }
             game.pickFaceUpTile(tuile);
+            rep = 1;
         }
+        return rep;
     }
 
 

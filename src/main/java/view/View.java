@@ -57,5 +57,5 @@ public interface View {
 
     int askFaceUpOrDown();
 
-    void chooseTile(int choix);
+    int chooseTile(int choix);
 }
