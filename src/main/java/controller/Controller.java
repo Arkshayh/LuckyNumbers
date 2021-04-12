@@ -1,9 +1,7 @@
 package controller;
 
 import model.Game;
-import model.Model;
 import model.State;
-import view.MyView;
 import view.View;
 
 import java.util.Scanner;

@@ -7,7 +7,7 @@ package view;
  * The method has as job to diplay information/question for players
  */
 
-import model.Game;
+
 import model.Position;
 import model.Model;
 import model.Tile;
@@ -26,8 +26,11 @@ public class MyView implements View{
         System.out.println("*Bienvenue sur le jeu luckynumbers* par Cotton Ian (version 0.1)");
     }
 
+    /**
+     * Display the number of the current player and the line with the number of each column
+     * @param taille int | taille = the size of the baord
+     */
     private void displayHeader(int taille){
-        //Header
         System.out.println("Joueur "+ (game.getCurrentPlayerNumber()+1));
         for (int i = 0; i <taille; i++) {
             if(i == 0){
@@ -42,17 +45,19 @@ public class MyView implements View{
 
     }
 
+    /**
+     *Display the each line of the board (line per line) and each tile putted
+     * @param taille int
+     */
     private void displayBody(int taille){
-        //Each line/column of the board. Display line per line
+
         int player = game.getCurrentPlayerNumber();
         Tile valeur;
-        for (int j = 0; j < taille; j++) { //For each row display "|" at the beginning
+        for (int j = 0; j < taille; j++) {
             System.out.print((j+1) + "|");
 
             for (int k = 0; k < taille; k++) { //column
                 valeur = game.getTile(player, new Position(j,k));
-
-                //To display the first tile of the line | There is one less space when you're the fist tile of a line
                 if(k == 0){
                     if(valeur == null){
                         System.out.print(" .");
@@ -64,8 +69,6 @@ public class MyView implements View{
                         System.out.print(valeur);
                     }
                 }
-
-                //To display the last tile of a line (it must be a println)
                 else if(k == game.getBoardSize() - 1){
                     if(valeur == null){
                         System.out.println("  .");
@@ -77,8 +80,6 @@ public class MyView implements View{
                         System.out.println(" " + valeur);
                     }
                 }
-
-                //To diplay the tile in the middle of the line classic diplay 2 space and value
                 else{
                     if(valeur == null){
                         System.out.print("  .");
@@ -100,16 +101,11 @@ public class MyView implements View{
     public void displayGame() {
         int taille = 4;
         displayHeader(taille);
-
-        //transition bar
         System.out.println("-------------");
 
         displayBody(taille);
-
-        //Transition
         System.out.println("-------------");
 
-        //Show the value of the pickedtile
         System.out.println("Tuile choisie : " + game.getPickedTile());
     }
 

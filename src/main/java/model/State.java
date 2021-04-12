@@ -28,6 +28,10 @@ public enum State {
     /**
      *the game is over, you can only restart one (-> bring back to pick tile state)
      */
-    GAME_OVER;
-    
+    GAME_OVER,
+
+    /**
+     * You can only drop/place your tile if place -> check if game over | if drop -> turn end
+     */
+    PLACE_OR_DROP_TILE;
 }

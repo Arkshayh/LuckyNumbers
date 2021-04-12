@@ -10,6 +10,7 @@ package model;
 
 public class Tile {
     private Integer value;
+    private boolean faceUp;
 
     /**
      *Constructor, builds a tile with an attribute value between 1 and 20 (included)
@@ -21,6 +22,7 @@ public class Tile {
                     value);
         }
         this.value = value;
+        this.faceUp = false;
     }
 
     /**
@@ -34,5 +36,23 @@ public class Tile {
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    /**
+     * getter for faceUp attribute
+     * @return boolean
+     */
+
+    public boolean isFaceUp() {
+        return faceUp;
+    }
+
+    /**
+     * Make a tile visible. Nothing happens if it is already visible.
+     */
+    public void flipFaceUp(){
+        if(this.faceUp == false){
+            this.faceUp = true;
+        }
     }
 }

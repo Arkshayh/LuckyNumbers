@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Arrays;
-
 /**
  *@author g55019 / Cotton Ian
  *The board class defines a game board on which the player will place his Tiles
