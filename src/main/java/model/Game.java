@@ -97,7 +97,7 @@ public class Game implements Model{
     public List<Tile> getAllfaceUpTiles(){
         return deck.getAllFaceUp();
     }
-
+    
     @Override
     public void putTile(Position pos) {
         Tile tuile = this.pickedTile;
