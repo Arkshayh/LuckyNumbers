@@ -181,7 +181,7 @@ public class MyView implements View{
         System.out.println("Les tuiles non cachées : " + game.getAllfaceUpTiles());
     }
 
-
+    @Override
     public int askFaceUpOrDown(){
         Scanner clavier = new Scanner(System.in);
         System.out.println("Entrer '1' pour choisir une tuile cachée aléatoire et '2' pour une tuile visible : ");
@@ -194,6 +194,7 @@ public class MyView implements View{
         return choix;
     }
 
+    @Override
     public void chooseTile(int choix){
         Scanner clavier = new Scanner(System.in);
         Tile tuile;
@@ -213,8 +214,6 @@ public class MyView implements View{
             }
             game.pickFaceUpTile(tuile);
         }
-
-        return tuile;
     }
 
 

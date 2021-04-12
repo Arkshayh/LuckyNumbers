@@ -54,4 +54,8 @@ public interface View {
      * Display the face up tile
      */
     void displayFaceUp();
+
+    int askFaceUpOrDown();
+
+    void chooseTile(int choix);
 }
