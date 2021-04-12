@@ -44,4 +44,14 @@ public interface View {
      */
     void displayError(String message);
 
+    /**
+     * Display the number of face down tile
+     * @param nb
+     */
+    void displayFaceDown(int nb);
+
+    /**
+     * Display the face up tile
+     */
+    void displayFaceUp();
 }

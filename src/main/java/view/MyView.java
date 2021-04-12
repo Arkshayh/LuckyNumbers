@@ -170,4 +170,52 @@ public class MyView implements View{
     public void displayError(String message) {
         System.out.println("Erreur : " + message);
     }
+
+    @Override
+    public void displayFaceDown(int nb){
+        System.out.println("Il reste " + nb + " tuiles cachées.");
+    }
+
+    @Override
+    public void displayFaceUp(){
+        System.out.println("Les tuiles non cachées : " + game.getAllfaceUpTiles());
+    }
+
+
+    public int askFaceUpOrDown(){
+        Scanner clavier = new Scanner(System.in);
+        System.out.println("Entrer '1' pour choisir une tuile cachée aléatoire et '2' pour une tuile visible : ");
+        int choix = clavier.nextInt();
+        while(choix != 1 && choix != 2){
+            System.out.println("Erreur !");
+            System.out.println("Entrer '1' pour choisir une tuile cachée aléatoire et '2' pour une tuile visible : ");
+            choix = clavier.nextInt();
+        }
+        return choix;
+    }
+
+    public void chooseTile(int choix){
+        Scanner clavier = new Scanner(System.in);
+        Tile tuile;
+        if(choix == 1){
+            tuile = game.pickFaceDownTile();
+        }
+        else{
+            System.out.println("Entrer la valeur de la tuile que vous voulez choisir : ");
+            displayFaceUp();
+            int val = clavier.nextInt();
+            tuile = new Tile(val);
+            while(game.getAllfaceUpTiles().contains(tuile) == false){
+                System.out.println("Erreur !");
+                System.out.println("Entrer la valeur de la tuile que vous voulez choisir : ");
+                val = clavier.nextInt();
+                tuile = new Tile(val);
+            }
+            game.pickFaceUpTile(tuile);
+        }
+
+        return tuile;
+    }
+
+
 }
