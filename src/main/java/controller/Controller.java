@@ -26,13 +26,23 @@ public class Controller {
     public void play(){
         this.vue.displayWelcome();
         int NbPlayer = vue.askPlayerCount();
+        int choix;
+        int choix2;
         boolean replay = true;
         while (replay == true){
             game.start(NbPlayer);
             while(game.getState() != State.GAME_OVER){
-                game.pickTile();
+                vue.displayFaceUp();
+                vue.displayFaceDown(game.faceDownTileCount());
+                choix = vue.askFaceUpOrDown();
+                choix2 = vue.chooseTile(choix);
                 vue.displayGame();
-                game.putTile(vue.askPosition());
+                if(choix2 == 1){
+                    game.putTile(vue.askPosition());
+                }
+                else{
+                    game.dropTile();
+                }
                 if(game.getState() != State.GAME_OVER){
                     game.nextPlayer();
                 }
