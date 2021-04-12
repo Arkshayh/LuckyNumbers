@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 /**
  *
  * @author g55019 / Cotton Ian
@@ -54,5 +56,18 @@ public class Tile {
         if(this.faceUp == false){
             this.faceUp = true;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tile tile = (Tile) o;
+        return Objects.equals(getValue(), tile.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getValue(), isFaceUp());
     }
 }
