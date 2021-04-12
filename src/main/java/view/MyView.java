@@ -12,6 +12,7 @@ import model.Position;
 import model.Model;
 import model.Tile;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MyView implements View{
@@ -212,8 +213,8 @@ public class MyView implements View{
             }
         }
         else{
-            System.out.println("Entrer la valeur de la tuile que vous voulez choisir : ");
             displayFaceUp();
+            System.out.println("Entrer la valeur de la tuile que vous voulez choisir : ");
             int val = clavier.nextInt();
             tuile = new Tile(val);
             while(game.getAllfaceUpTiles().contains(tuile) == false){

@@ -101,7 +101,7 @@ public class Game implements Model{
     @Override
     public void putTile(Position pos) {
         Tile tuile = this.pickedTile;
-        if(this.state != State.PLACE_TILE){
+        if(this.state != State.PLACE_TILE && this.state != State.PLACE_OR_DROP_TILE){
             throw new IllegalStateException("Etat incorrect dans : " + this.state);
         }
         if(this.boards[currentPlayerNumber].canBePut(tuile, pos) == false){
@@ -178,7 +178,7 @@ public class Game implements Model{
 
     @Override
     public boolean canTileBePut(Position pos) {
-        if(this.state != State.PLACE_TILE){
+        if(this.state != State.PLACE_TILE && this.state != State.PLACE_OR_DROP_TILE){
             throw new IllegalStateException("Etat incorrect  : " + this.state);
         }
         if(isInside(pos) == false){
