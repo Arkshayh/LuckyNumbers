@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * @author g55019 / Cotton Ian
  * A class game has a State state
@@ -18,6 +20,7 @@ public class Game implements Model{
     private int currentPlayerNumber;
     private Board[] boards;
     private Tile pickedTile;
+    private Deck deck;
 
     public Game() {
         this.state = State.NOT_STARTED;
@@ -38,6 +41,7 @@ public class Game implements Model{
         }
         this.playerCount = playerCount;
         this.currentPlayerNumber = 0;
+        this.deck = new Deck(playerCount);
         this.state = State.PICK_TILE;
     }
 
@@ -47,27 +51,51 @@ public class Game implements Model{
     }
 
     @Override
-    public Tile pickTile() {
+    public Tile pickFaceDownTile() {
         if(this.state != State.PICK_TILE){
             throw new IllegalStateException("Etat incorrect : " + this.state);
         }
 
         //random value between 2 and 20 (included)
-        Tile tuile = new Tile((int)(Math.random() * ((20 - 2) + 1)) + 2);
-
-        this.state = State.PLACE_TILE;
+        Tile tuile = deck.pickFaceDown();
+        this.state = State.PLACE_OR_DROP_TILE;
         this.pickedTile = tuile;
 
         return tuile;
     }
 
-    public Tile pickTile(int value) {
+    @Override
+    public void pickFaceUpTile(Tile tuile) {
         if(this.state != State.PICK_TILE){
             throw new IllegalStateException("Etat incorrect : " + this.state);
         }
+        deck.pickFaceUp(tuile);
+        this.pickedTile = tuile;
         this.state = State.PLACE_TILE;
-        this.pickedTile = new Tile(value);
-        return new Tile(value);
+    }
+
+    @Override
+    public void dropTile(){
+        if(this.state != State.PLACE_OR_DROP_TILE){
+            throw new IllegalStateException("Etat incorrect : " + this.state);
+        }
+        deck.putBack(this.pickedTile);
+        this.state = State.TURN_END;
+    }
+
+    @Override
+    public int faceDownTileCount(){
+        return deck.faceDownCount();
+    }
+
+    @Override
+    public int faceUpTileCount(){
+        return deck.faceUpCount();
+    }
+
+    @Override
+    public List<Tile> getAllfaceUpTiles(){
+        return deck.getAllFaceUp();
     }
 
     @Override

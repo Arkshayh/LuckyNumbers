@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * Interface for the Game model.
  *
@@ -35,14 +37,45 @@ public interface Model {
     int getBoardSize();
 
     /**
-     * The current player pick a tile. In this version of the game, a random one
-     * is created.
-     * State becomes PLACE_TILE.
-     *
+     * choose a face down tile at random
+     * State becomes PLACE_OR_DROP_TILE.
      * @return the picked tile
      * @throws IllegalStateException if called when state is not PICK_TILE
      */
-    Tile pickTile();
+    Tile pickFaceDownTile();
+
+    /**
+     * choose a face up tile
+     * State becomes PLACE_TILE.
+     * @return the picked tile
+     * @throws IllegalStateException if called when state is not PICK_TILE
+     */
+    void pickFaceUpTile(Tile tile);
+
+    /**
+     * places the previously chosen tile in the draw pile, face up.
+     * State becomes TURN_END.
+     * @throws IllegalStateException if called when state is not PLACE_OR_DROP_TILE;
+     */
+    void dropTile();
+
+    /**
+     *gives the number of tiles face down.
+     * @return the number of tiles face down.
+     */
+    int faceDownTileCount();
+
+    /**
+     * gives the number of tiles face up.
+     * @return the number of tiles face down.
+     */
+    int faceUpTileCount();
+
+    /**
+     * give the lists the face up tiles.
+     * @return lists the face up tiles.
+     */
+    List<Tile> getAllfaceUpTiles();
 
     /**
      * Put a tile at the given position. Put the previously picked tile of the
