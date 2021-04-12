@@ -27,20 +27,6 @@ public class Deck {
     }
 
     /**
-     * getter for faceUpTiles
-     */
-    public ArrayList<Tile> getFaceUpTiles() {
-        return faceUpTiles;
-    }
-
-    /**
-     * getter for faceDownTiles
-     */
-    public ArrayList<Tile> getFaceDownTile() {
-        return faceDownTile;
-    }
-
-    /**
      * Stretch a face down tile and turn it over.
      */
     public Tile pickFaceDown(){
@@ -109,7 +95,7 @@ public class Deck {
     }
 
     /**
-     * replace dans la pioche, face visible, la tuile donnée.
+     * replace the given tile face up in the draw pile.
      * @param tuile given tile
      */
     public void putBack(Tile tuile){
