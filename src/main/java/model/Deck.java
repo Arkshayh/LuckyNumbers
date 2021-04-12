@@ -101,5 +101,5 @@ public class Deck {
     public void putBack(Tile tuile){
         this.faceUpTiles.add(tuile);
     }
-
+    
 }
