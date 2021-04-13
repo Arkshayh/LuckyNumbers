@@ -1,5 +1,10 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 /**
  *@author g55019 / Cotton Ian
  *The board class defines a game board on which the player will place his Tiles
@@ -9,10 +14,17 @@ package model;
 public class Board {
     private Tile[][] plateau;
 
-    // Constructor, initialize the plate attribute -> 2-dimensional array of size 4x4
-    // Adding an easily implementable size attribute
+    /**
+     * Constructor, initialize the plate attribute -> 2-dimensional array of size 4x4
+     * Adding an easily implementable size attribute
+     * 4 random tiles are generated and are placed on the descending diagonal from the smallest to the largest
+     */
     public Board() {
         Tile[][] plateaudeTuile = new Tile[4][4];
+        List<Tile> randomTile = fourRandomTile();
+        for(int i =0; i < randomTile.size();i++){
+            plateaudeTuile[i][i] = randomTile.get(i);
+        }
         this.plateau = plateaudeTuile;
     }
 
@@ -69,10 +81,10 @@ public class Board {
         if(pos.getColumn() == 0){
             return null;
         }
-        /*
-        Check the line starting from the given position to the left,
-        return the first value found, if there is none return null (no value)
-         */
+        /**
+         *Check the line starting from the given position to the left,
+         *return the first value found, if there is none return null (no value)
+         **/
         Integer VG = 0;
         for (int i = 1; i < this.plateau.length -1; i++) {
             if(pos.getColumn()  - i >= 0){
@@ -171,12 +183,12 @@ public class Board {
         int colonne = pos.getColumn();
         int valTuile = tuile.getValue();
 
-        /*
-        Get the value of the tile above / to the left / to the right / to the bottom of the given tile position
-        If their value does not hinder the fact of being able to place the tile returns true,
-        we can well place the tile otherwise returns false impossible
-        (null -> no tile on this side.)
-         */
+        /**
+         *Get the value of the tile above / to the left / to the right / to the bottom of the given tile position
+         *If their value does not hinder the fact of being able to place the tile returns true,
+         *we can well place the tile otherwise returns false impossible
+         *(null -> no tile on this side.)
+         **/
         if((parcourirColonneVersHaut(pos) == null || parcourirColonneVersHaut(pos) < valTuile) &&
                 (parcourirColonneVersBas(pos) == null || parcourirColonneVersBas(pos) > valTuile) &&
                 (parcourirLigneVersGauche(pos) == null || parcourirLigneVersGauche(pos) < valTuile) &&
@@ -188,18 +200,18 @@ public class Board {
         }
     }
 
-    /*
-    Add a tile in the array at a given position, it is assumed that the position is on the board
-    @param Tile, Position | the position is on the board
-     */
+    /**
+     *Add a tile in the array at a given position, it is assumed that the position is on the board
+     *@param Tile, Position | the position is on the board
+     **/
     public void put(Tile tuile, Position pos){
         this.plateau[pos.getRow()][pos.getColumn()] = tuile;
     }
 
-    /*
-    Say if the board if full or not, if it's the case return true else false
-    @return boolean | if there is no null return true else false
-     */
+    /**
+     *Say if the board if full or not, if it's the case return true else false
+     *@return boolean | if there is no null return true else false
+     **/
     public boolean isFull(){
         for(int ligne = 0; ligne < this.plateau.length;ligne++){
             for (int colonne = 0; colonne < this.plateau[0].length; colonne++){
@@ -209,6 +221,35 @@ public class Board {
             }
         }
         return true;
+    }
+
+    /**
+     * Create a list of random tiles sorted in ascending order
+     * @return List<Tile>
+     */
+    private List<Tile> fourRandomTile(){
+        List<Integer> randomValue = new ArrayList<>();
+        List<Tile> randomTile = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            randomValue.add(random());
+        }
+        Collections.sort(randomValue);
+        for (int i = 0; i <randomValue.size(); i++) {
+            randomTile.add(new Tile(randomValue.get(i)));
+        }
+        return randomTile;
+    }
+
+    /**
+     * return a random number between 1 and 20
+     * @return int
+     */
+    private int random(){
+        int min = 1;
+        int max = 20;
+        Random r = new Random();
+        int nb =  r.nextInt((max - min) + 1) + min;
+        return nb;
     }
 
 }
