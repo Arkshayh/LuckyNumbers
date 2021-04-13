@@ -17,6 +17,14 @@ public class Board {
     }
 
     /**
+     * getter
+     * @return Tile[][];
+     */
+    public Tile[][] getPlateau() {
+        return plateau;
+    }
+
+    /**
     *Allows you to know the size of the tile board and returns it.
     *@return Integer the size of the array
     */
