@@ -165,11 +165,14 @@ public interface Model {
     Tile getTile(int playerNumber, Position pos);
 
     /**
-     * Give the winner.
+     * Give the winner(s).
      *
-     * @return the number of the winner.
+     * @return the number of the winner(s).
      * @throws IllegalStateException if game state is not GAME_OVER
      */
-    int getWinner();
+    List<Integer> getWinners();
+
+
+
 
 }

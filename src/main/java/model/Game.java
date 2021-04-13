@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -97,7 +100,7 @@ public class Game implements Model{
     public List<Tile> getAllfaceUpTiles(){
         return deck.getAllFaceUp();
     }
-    
+
     @Override
     public void putTile(Position pos) {
         Tile tuile = this.pickedTile;
@@ -111,7 +114,7 @@ public class Game implements Model{
         else{
             Board plateau = this.boards[currentPlayerNumber];
             plateau.put(tuile, pos);
-            if(this.boards[currentPlayerNumber].isFull() == true){
+            if(this.boards[currentPlayerNumber].isFull() == true || areListsEmpty() == true){
                 this.state = State.GAME_OVER;
             }
             else{
@@ -208,10 +211,67 @@ public class Game implements Model{
     }
 
     @Override
-    public int getWinner() {
+    public List<Integer> getWinners() {
         if(this.state != State.GAME_OVER){
             throw new IllegalStateException("Etat incorrect : " + this.state);
         }
-        return this.currentPlayerNumber;
+        List<Integer> gagnant = new ArrayList<>();
+        if(this.boards[currentPlayerNumber].isFull() == true){
+            gagnant.add(this.currentPlayerNumber);
+        }
+        else{
+            gagnant = winnerByMostTile();
+        }
+        return gagnant;
     }
+
+    /**
+     * Check if the facedown list and the faceip list are empty
+     * @return boolean || true if both list are empty
+     */
+    private boolean areListsEmpty(){
+        if(deck.faceDownCount() == 0 && deck.faceUpCount() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * Add to a list the number of the player who has putted the most tile on his board
+     * @return the list with the number of the winner(s)
+     */
+    private List<Integer> winnerByMostTile(){
+        List<Integer> nBPoint = new ArrayList<>();
+        List<Integer> gagnant = new ArrayList<>();
+        for (int i = 0;  i < this.playerCount; i++){
+            nBPoint.add(countPoint(i));
+        }
+        Integer max = Collections.max(nBPoint);
+        for(int i = 0; i < nBPoint.size(); i++){
+            if(nBPoint.get(i) == max){
+                gagnant.add(i);
+            }
+        }
+        return gagnant;
+    }
+
+    /**
+     * Count the points of each player (each tile putted = one point)
+     * @param numPlayer
+     * @return int | the number of points
+     */
+    private int countPoint(int numPlayer){
+        int nbPoint = 0;
+        for(int ligne = 0; ligne < this.boards[numPlayer].getPlateau().length;ligne++){
+            for (int colonne = 0; colonne < this.boards[numPlayer].getPlateau()[0].length; colonne++){
+                if(this.boards[numPlayer].getPlateau()[ligne][colonne] != null){
+                    nbPoint++;
+                }
+            }
+        }
+        return nbPoint;
+    }
+
 }

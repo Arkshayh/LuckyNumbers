@@ -112,7 +112,15 @@ public class MyView implements View{
 
     @Override
     public void displayWinner() {
-        System.out.println("Le gagnant est le joueur : " + (game.getWinner() + 1));
+        if(game.getWinners().size() == 1){
+            System.out.println("Le gagnant est le joueur : " + ((game.getWinners().get(0)) + 1));
+        }
+        else{
+            System.out.println("Les gagnants sont : ");
+            for (int i = 0; i < game.getWinners().size(); i++) {
+                System.out.println("Le joueur : " + ((game.getWinners().get(i)) + 1));
+            }
+        }
     }
 
     @Override
