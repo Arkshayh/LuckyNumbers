@@ -28,10 +28,22 @@ public class Deck {
 
     /**
      * Stretch a face down tile and turn it over.
+     * @Return Tile | a random tile from the face down tile list
+     * @throws IllegalArgumentException if the list is empty
      */
     public Tile pickFaceDown(){
         int taille = this.faceDownTile.size() - 1;
-        int index = getRandomNumberInRange(taille);
+        if(taille < 0){
+            throw new IllegalArgumentException("plus de tuile");
+        }
+        int index;
+        if(taille == 0){
+            index = 0;
+        }
+        else{
+            index = getRandomNumberInRange(taille);
+        }
+
         Tile pickedTile = this.faceDownTile.get(index);
         faceDownTile.remove(index);
         pickedTile.flipFaceUp();
@@ -42,6 +54,7 @@ public class Deck {
      * Return a random number between 0 and the 20* number of player
      * @param max | 20* the number of player
      * @return random position between 0 and max
+     * @throws IllegalArgumentException if max < min
      */
     private int getRandomNumberInRange(int max) {
         int min = 0;
@@ -55,7 +68,7 @@ public class Deck {
 
     /**
      * gives the number of cards face down in the draw pile
-     * @return int the number of cards face down in the draw pile
+     * @return int | the number of cards face down in the draw pile
      */
     public int faceDownCount(){
         return this.faceDownTile.size();
@@ -63,7 +76,7 @@ public class Deck {
 
     /**
      * gives the number of cards face up in the draw pile
-     * @return int the number of cards face up in the draw pile
+     * @return int | the number of cards face up in the draw pile
      */
     public int faceUpCount(){
         return this.faceUpTiles.size();
@@ -101,5 +114,4 @@ public class Deck {
     public void putBack(Tile tuile){
         this.faceUpTiles.add(tuile);
     }
-    
 }
