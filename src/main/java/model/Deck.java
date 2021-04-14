@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class contains all the tiles available in the center of the table, whether face-up or not.
+ * 2 lists are created one for the face down tiles and one for the face up tiles
+ */
+
 public class Deck {
     private ArrayList<Tile> faceUpTiles;
     private ArrayList<Tile> faceDownTile;
