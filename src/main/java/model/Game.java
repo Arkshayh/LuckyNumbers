@@ -117,7 +117,7 @@ public class Game implements Model{
 
     @Override
     public List<Tile> getAllfaceUpTiles(){
-        return deck.getAllFaceUp();
+        return Collections.unmodifiableList(deck.getAllFaceUp());
     }
 
     @Override
