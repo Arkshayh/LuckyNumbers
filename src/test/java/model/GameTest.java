@@ -37,15 +37,17 @@ public class GameTest {
 
     /* Play a game till the end */
     private void fullPlay() {
-        game.start(2);
+        game.startTest();
         int value = 1;
         int line = 0;
         int col = 0;
         for (int turn = 1; turn < game.getBoardSize() * game.getBoardSize(); turn++) {
             for (int player = 0; player < game.getPlayerCount(); player++) {
-                game.pickTile(value);
-                game.putTile(new Position(line, col));
-                game.nextPlayer();
+                if(game.getState() != State.GAME_OVER){
+                    game.pickFaceUpTile(new Tile(value));
+                    game.putTile(new Position(line, col));
+                    game.nextPlayer();
+                }
             }
             value++;
             col++;
@@ -54,8 +56,10 @@ public class GameTest {
                 line++;
             }
         }
-        game.pickTile(20);
-        game.putTile(new Position(line,col));
+        if(game.getState() != State.GAME_OVER){
+            game.pickFaceUpTile(new Tile(20));
+            game.putTile(new Position(line, col));
+        }
     }
 
     @Test
@@ -116,47 +120,15 @@ public class GameTest {
     @Test
     public void pick_tile_when_state_incorrect_Exception(){
         game.start(2);
-        game.pickTile(5);
+        game.pickFaceDownTile();
         assertThrows(IllegalStateException.class,
-                () -> game.pickTile(10));
+                () -> game.pickFaceDownTile());
     }
 
     @Test
     public void pick_tile_when_state_ok(){
         game.start(2);
-        game.pickTile(5);
-    }
-
-    @Test
-    public void pick_tile_when_value_ok(){
-        game.start(2);
-        game.pickTile(5);
-    }
-
-    @Test
-    public void pick_tile_when_value_max(){
-        game.start(2);
-        game.pickTile(20);
-    }
-
-    @Test
-    public void pick_tile_when_value_min(){
-        game.start(2);
-        game.pickTile(20);
-    }
-
-    @Test
-    public void pick_tile_when_value_too_big_Exeption(){
-        game.start(2);
-        assertThrows(IllegalArgumentException.class,
-                () -> game.pickTile(21));
-    }
-
-    @Test
-    public void pick_tile_when_value_too_small_Exeption(){
-        game.start(2);
-        assertThrows(IllegalArgumentException.class,
-                () -> game.pickTile(-4));
+        game.pickFaceDownTile();
     }
 
     @Test
@@ -169,14 +141,14 @@ public class GameTest {
     @Test
     public void put_Tile_ok(){
         game.start(2);
-        game.pickTile(5);
+        game.pickFaceDownTile();
         game.putTile(new Position(2,2));
     }
 
     @Test
     public void put_Tile_wrong_position(){
         game.start(2);
-        game.pickTile(5);
+        game.pickFaceDownTile();
         assertThrows(ArrayIndexOutOfBoundsException.class,
                 () -> game.putTile(new Position(-1,0)));
     }
@@ -184,7 +156,7 @@ public class GameTest {
     @Test
     public void next_player_ok(){
         game.start(2);
-        game.pickTile(5);
+        game.pickFaceDownTile();
         game.putTile(new Position(2,2));
         game.nextPlayer();
     }
@@ -192,7 +164,7 @@ public class GameTest {
     @Test
     public void next_player_State_Exception(){
         game.start(2);
-        game.pickTile(5);
+        game.pickFaceDownTile();
         assertThrows(IllegalStateException.class,
                 () -> game.nextPlayer());
     }
@@ -200,7 +172,7 @@ public class GameTest {
     @Test
     public void get_current_player_number_ok(){
         game.start(2);
-        game.pickTile(5);
+        game.pickFaceDownTile();
         game.getCurrentPlayerNumber();
     }
 
@@ -271,28 +243,28 @@ public class GameTest {
     @Test
     public void can_tile_be_put_wrong_position_exception(){
         game.start(2);
-        game.pickTile();
+        game.pickFaceDownTile();
         assertThrows(IllegalArgumentException.class,
                 () -> game.canTileBePut(new Position(-1,0)));
     }
     @Test
     public void can_tile_be_put_wrong_position2_exception(){
         game.start(2);
-        game.pickTile();
+        game.pickFaceDownTile();
         assertThrows(IllegalArgumentException.class,
                 () -> game.canTileBePut(new Position(0,-1)));
     }
     @Test
     public void can_tile_be_put_wrong_position3_exception(){
         game.start(2);
-        game.pickTile();
+        game.pickFaceDownTile();
         assertThrows(IllegalArgumentException.class,
                 () -> game.canTileBePut(new Position(4,0)));
     }
     @Test
     public void can_tile_be_put_wrong_position4_exception(){
         game.start(2);
-        game.pickTile();
+        game.pickFaceDownTile();
         assertThrows(IllegalArgumentException.class,
                 () -> game.canTileBePut(new Position(-1,4)));
     }

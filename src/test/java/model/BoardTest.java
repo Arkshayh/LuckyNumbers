@@ -14,7 +14,7 @@ public class BoardTest {
 
     @BeforeEach     // Exécutée avant chaque test
     public void setUp() {
-        board = new Board();
+        board = new Board(1);
     }
 
     /* === Tests for isInside === */
