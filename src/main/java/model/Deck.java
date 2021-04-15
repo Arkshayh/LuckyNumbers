@@ -32,7 +32,7 @@ public class Deck {
     }
 
     /**
-     * Constructor for test for the gametest
+     * Constructor for test
      */
     public Deck() {
         ArrayList<Tile> faceUp = new ArrayList<>();
@@ -42,6 +42,7 @@ public class Deck {
             }
         }
         this.faceUpTiles = faceUp;
+        this.faceDownTile = new ArrayList<>();
     }
 
     /**
