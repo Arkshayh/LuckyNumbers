@@ -55,7 +55,19 @@ public interface View {
      */
     void displayFaceUp();
 
+    /**
+     *Asks the user if they want to choose a hidden tile (they must enter 1)
+     * or choose a visible tile (2)
+     * @return int | value 1 or 2
+     */
     int askFaceUpOrDown();
 
+    /**
+     *If choice == 1 the user receives a random tile, he must choose between
+     * the placed (1) or the drop (2). Rep = 1 or 2
+     * If choice != 1 the user must select a visible tile and rep = 1
+     * @param choix int | 2 value -> 1 or 2
+     * @return rep int | value 1 | 2
+     */
     int chooseTile(int choix);
 }

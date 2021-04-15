@@ -12,7 +12,6 @@ import model.Position;
 import model.Model;
 import model.Tile;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class MyView implements View{
