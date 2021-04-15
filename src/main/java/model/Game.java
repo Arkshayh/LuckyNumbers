@@ -48,6 +48,26 @@ public class Game implements Model{
         this.state = State.PICK_TILE;
     }
 
+    /**
+     * Constructor for test
+     */
+    void startTest(){
+        if((this.state != State.NOT_STARTED) && (this.state != State.GAME_OVER)){
+            throw new IllegalStateException("Etat invalide : " + this.state);
+        }
+        else if(2 < 2 || 2 > 4){
+            throw new IllegalArgumentException("Nombre de joueur incorrect : " + playerCount);
+        }
+        this.boards = new Board[2]; //Create the Board[]
+        for (int i = 0; i < 2; i++) {
+            this.boards[i] = new Board(1); //Create the board for each player
+        }
+        this.playerCount = 2;
+        this.currentPlayerNumber = 0;
+        this.deck = new Deck();
+        this.state = State.PICK_TILE;
+    }
+
     @Override
     public int getBoardSize() {
         return this.boards[currentPlayerNumber].getSize();
@@ -108,13 +128,18 @@ public class Game implements Model{
             throw new IllegalStateException("Etat incorrect dans : " + this.state);
         }
         if(this.boards[currentPlayerNumber].canBePut(tuile, pos) == false){
-            throw new IllegalArgumentException("Position incorrect / impossible de poser la tuile à cette endroit" +
-                    tuile.getValue() + ", " + pos);
+            throw new IllegalArgumentException("Position incorrect / impossible de poser la tuile à cette endroit. " +
+                    "Valeur de la tuile : " +
+                    tuile.getValue() + ", position donnée : " + pos + " Tuile se trouvant à la position actuelle : " +
+                    this.boards[this.currentPlayerNumber].getTile(pos));
         }
         else{
             Board plateau = this.boards[currentPlayerNumber];
             plateau.put(tuile, pos);
-            if(this.boards[currentPlayerNumber].isFull() == true || areListsEmpty() == true){
+            if(this.boards[currentPlayerNumber].isFull() == true){
+                this.state = State.GAME_OVER;
+            }
+            else if(areListsEmpty() == true){
                 this.state = State.GAME_OVER;
             }
             else{
