@@ -16,7 +16,7 @@ public class Tile {
 
     /**
      *Constructor, builds a tile with an attribute value between 1 and 20 (included)
-     *@param Integer, number between 1 and 20
+     *@param value Integer, number between 1 and 20
      */
     public Tile(Integer value) {
         if(value < 1 || value > 20){
