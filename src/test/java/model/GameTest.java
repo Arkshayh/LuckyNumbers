@@ -118,17 +118,30 @@ public class GameTest {
     }
 
     @Test
-    public void pick_tile_when_state_incorrect_Exception(){
+    public void pick_face_down_when_state_incorrect_Exception(){
         game.start(2);
         game.pickFaceDownTile();
         assertThrows(IllegalStateException.class,
                 () -> game.pickFaceDownTile());
     }
+    @Test
+    public void pick_face_up_when_state_incorrect_Exception(){
+        game.startTest();
+        game.pickFaceUpTile(new Tile(5));
+        assertThrows(IllegalStateException.class,
+                () -> game.pickFaceUpTile(new Tile(5)));
+    }
 
     @Test
-    public void pick_tile_when_state_ok(){
+    public void pick_face_down_when_state_ok(){
         game.start(2);
         game.pickFaceDownTile();
+    }
+
+    @Test
+    public void pick_face_up_when_state_ok(){
+        game.startTest();
+        game.pickFaceUpTile(new Tile(5));
     }
 
     @Test
@@ -291,15 +304,58 @@ public class GameTest {
     }
 
     @Test
-    public void get_winner_state_Exception(){
+    public void get_winners_state_Exception(){
         game.start(2);
         assertThrows(IllegalStateException.class,
                 () -> game.getWinners());
     }
 
     @Test
-    public void get_winner_ok(){
+    public void get_winners_ok(){
         fullPlay();
         game.getWinners();
     }
+    @Test
+    public void drop_tile_ok(){
+        game.start(2);
+        game.pickFaceDownTile();
+        game.dropTile();
+    }
+
+    @Test
+    public void drop_tile_state_exception(){
+        game.start(2);
+        assertThrows(IllegalStateException.class, () -> game.dropTile());
+    }
+
+    @Test
+    public void face_down_count_full(){
+        game.start(2);
+        game.faceDownTileCount();
+    }
+
+    @Test
+    public void face_down_count_empty(){
+        game.startTest();
+        game.faceDownTileCount();
+    }
+
+    @Test
+    public void face_up_count_full(){
+        game.startTest();
+        game.faceUpTileCount();
+    }
+
+    @Test
+    public void face_up_count_empty(){
+        game.start(2);
+        game.faceUpTileCount();
+    }
+
+    @Test
+    public void get_all_face_up(){
+        game.start(2);
+        game.faceUpTileCount();
+    }
+    
 }
