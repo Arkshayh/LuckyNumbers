@@ -30,7 +30,7 @@ public class Board {
 
     /**
      * constructor for test class
-     * @param int | test is uselss, it's just to have another constructor for test
+     * @param test int | test is uselss, it's just to have another constructor for test
      */
     public Board(int test){
         Tile[][] plateaudeTuile = new Tile[4][4];
@@ -70,7 +70,7 @@ public class Board {
 
     /**
      *Returns the board tile at a given position.
-     *@param Position,  The position of the tile we want
+     *@param pos Position,  The position of the tile we want
      *@return Tile, The tile at the given position
      */
     public Tile getTile(Position pos){
@@ -82,7 +82,7 @@ public class Board {
 
     /**
      *Go through a row of the board and return the value of the first element on the left, if there is none: returns null
-     *@param Position | position of the tile that we want to put on the board
+     *@param pos Position | position of the tile that we want to put on the board
      *@return Integer, null | value of the first tile met
      */
     private Integer parcourirLigneVersGauche(Position pos){
@@ -109,7 +109,7 @@ public class Board {
 
     /**
      *Go through a row of the board and return the value of the first element on the right, if there is none: returns null
-     *@param Position | position of the tile that we want to put on the board
+     *@param pos Position| position of the tile that we want to put on the board
      *@return Integer, null | value of the first tile met
      */
     private Integer parcourirLigneVersDroite(Position pos){
@@ -133,7 +133,7 @@ public class Board {
 
     /**
      *Go through a column of the board and return the value of the first element on the top, if there is none: returns null
-     *@param Position | position of the tile that we want to put on the board
+     *@param pos Position| position of the tile that we want to put on the board
      *@return Integer, null | value of the first tile met
      */
     private Integer parcourirColonneVersHaut(Position pos){
@@ -157,7 +157,7 @@ public class Board {
     /**
      * Go through a column of the board and return the value of the first element on the bottom,
      * if there is none: returns null
-     * @param Position | position of the tile that we want to put on the board
+     * @param pos Position | position of the tile that we want to put on the board
      * @return Integer, null | value of the first tile met
      */
     private Integer parcourirColonneVersBas(Position pos){
@@ -184,7 +184,7 @@ public class Board {
      * Return a boolean if the tile at the given position is Bigger or equals to the value of the top and left tile
      *     the methode && bot and right < tile given return true else false
      *
-     *     @param Tile , Position | a Tile and a Position if the position is OOB -> exception is thrown
+     *     @param tuile Tile , Position | a Tile and a Position if the position is OOB -> exception is thrown
      *     @return Boolean |true if the tile can be put at the given position if not -> false
      */
     public boolean canBePut(Tile tuile, Position pos){
@@ -211,7 +211,7 @@ public class Board {
 
     /**
      *Add a tile in the array at a given position, it is assumed that the position is on the board
-     *@param Tile, Position | the position is on the board
+     *@param tuile Tile, pos Position | the position is on the board
      **/
     public void put(Tile tuile, Position pos){
         this.plateau[pos.getRow()][pos.getColumn()] = tuile;
@@ -261,8 +261,4 @@ public class Board {
         return nb;
     }
 
-    public static void main(String[] args) {
-        Board plateau = new Board();
-        plateau.canBePut(new Tile(1), new Position(1,2));
-    }
 }
