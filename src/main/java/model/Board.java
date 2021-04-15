@@ -29,6 +29,15 @@ public class Board {
     }
 
     /**
+     * constructor for test class
+     * @param int | test is uselss, it's just to have another constructor for test
+     */
+    public Board(int test){
+        Tile[][] plateaudeTuile = new Tile[4][4];
+        this.plateau = plateaudeTuile;
+    }
+
+    /**
      * getter
      * @return Tile[][];
      */
@@ -252,4 +261,8 @@ public class Board {
         return nb;
     }
 
+    public static void main(String[] args) {
+        Board plateau = new Board();
+        plateau.canBePut(new Tile(1), new Position(1,2));
+    }
 }
