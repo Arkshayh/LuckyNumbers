@@ -32,6 +32,19 @@ public class Deck {
     }
 
     /**
+     * Constructor for test for the gametest
+     */
+    public Deck() {
+        ArrayList<Tile> faceUp = new ArrayList<>();
+        for(int i = 0; i < 2; i++){
+            for(int j = 1; j <= 20; j++){
+                faceUp.add(new Tile(j));
+            }
+        }
+        this.faceUpTiles = faceUp;
+    }
+
+    /**
      * Stretch a face down tile and turn it over.
      * @Return Tile | a random tile from the face down tile list
      * @throws IllegalArgumentException if the list is empty
