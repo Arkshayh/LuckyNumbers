@@ -22,7 +22,21 @@ public class Controller {
 
     /**
      * manages the game from start to finish. It is driven by the state of the game
+     * Step 1 display the welcome message
+     * Step 2 ask the number of player (between 2 and 4)
+     * Step 3 the game start and will display the face up tiles and will display
+     *        the number of face down tile
+     * Step 4 ask if the current player want to pick up a face up tile
+     *        or a face down tile
+     * Step 5 display the board of the current player
+     * Step 6 put tile on the board (you can also drop it if you took a face down
+     *        tile
+     * Step 7 if the state of the game is not game over -> it's the next player
+     *        turn
+     * Step 8 if the state is game over ask the player if he want to replay
+     *        if yes -> Step 3 if no -> end of the game
      */
+
     public void play(){
         this.vue.displayWelcome();
         int NbPlayer = vue.askPlayerCount();
