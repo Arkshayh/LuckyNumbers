@@ -46,11 +46,18 @@ public class Controller {
         while (replay == true){
             game.start(NbPlayer);
             while(game.getState() != State.GAME_OVER){
+                vue.displayGame();
                 vue.displayFaceUp();
                 vue.displayFaceDown(game.faceDownTileCount());
-                choix = vue.askFaceUpOrDown();
-                choix2 = vue.chooseTile(choix);
-                vue.displayGame();
+                if(this.game.faceUpTileCount() != 0){
+                    choix = vue.askFaceUpOrDown();
+                    choix2 = vue.chooseTile(choix);
+                }
+                else{
+                    choix2 = vue.chooseTile(1);
+                }
+
+                System.out.println("Tuile choisie : " + game.getPickedTile());
                 if(choix2 == 1){
                     game.putTile(vue.askPosition());
                 }

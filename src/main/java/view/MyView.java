@@ -105,8 +105,6 @@ public class MyView implements View{
 
         displayBody(taille);
         System.out.println("-------------");
-
-        System.out.println("Tuile choisie : " + game.getPickedTile());
     }
 
     @Override
